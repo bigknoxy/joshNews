@@ -14,7 +14,14 @@ export type JobRecord = {
 
 type HandlerFn = (payload?: any) => Promise<any>;
 
-export function createJobService(opts?: { concurrency?: number; defaultTimeout?: number; store?: { get: (id: string) => Promise<JobRecord|null> | JobRecord | null; put: (id: string, rec: JobRecord) => Promise<JobRecord>|JobRecord; } }) {
+export function createJobService(opts?: {
+  concurrency?: number;
+  defaultTimeout?: number;
+  store?: {
+    get: (id: string) => Promise<JobRecord | null> | JobRecord | null;
+    put: (id: string, rec: JobRecord) => Promise<JobRecord> | JobRecord;
+  };
+}) {
   const concurrency = opts?.concurrency ?? 3;
   const defaultTimeout = opts?.defaultTimeout ?? 5000;
   const store = opts?.store;
@@ -71,7 +78,8 @@ export function createJobService(opts?: { concurrency?: number; defaultTimeout?:
 
     const runPromise = (async () => {
       const fnFromRec = rec._fn;
-      const fn = fnOverride ?? fnFromRec ?? (rec.type ? handlers.get(rec.type as string) : undefined);
+      const fn =
+        fnOverride ?? fnFromRec ?? (rec.type ? handlers.get(rec.type as string) : undefined);
       if (!fn) throw new Error('no handler');
       const res = await fn(rec.payload);
       return { ok: true, res };
@@ -158,4 +166,3 @@ export function createJobService(opts?: { concurrency?: number; defaultTimeout?:
 
   return { startJob, getJob, register };
 }
-

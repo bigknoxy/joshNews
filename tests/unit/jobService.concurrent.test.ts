@@ -21,8 +21,8 @@ describe('Job service concurrency', () => {
     const id1 = js.startJob(longJob);
     const id2 = js.startJob(longJob);
 
-    const j1 = js.getJob(id1)!
-    const j2 = js.getJob(id2)!
+    const j1 = js.getJob(id1)!;
+    const j2 = js.getJob(id2)!;
 
     // immediately after starting: first should be running, second pending
     expect(j1.status).toBe('running');

@@ -42,7 +42,11 @@ export class MemoryAdapter {
         period,
         createdAt: now,
         version: (existing?.version || 0) + 1,
-        items: items.map((it: any) => ({ contentItemId: it.contentItemId, score: it.score, signals: it.signals })),
+        items: items.map((it: any) => ({
+          contentItemId: it.contentItemId,
+          score: it.score,
+          signals: it.signals,
+        })),
       });
       this.snapshots[period] = created;
       return created;

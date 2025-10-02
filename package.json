@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "dev": "bun --watch src/main.ts",
+    "start": "bun src/main.ts",
     "build": "echo \"no build configured\"",
     "test": "bun test",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",

@@ -5,17 +5,17 @@ import { startServer } from '../../src/main';
 let _server: http.Server | null = null;
 let baseUrl = 'http://127.0.0.1:3000';
 
-  beforeAll(async () => {
-    _server = await startServer(3000);
-    const addr = _server.address();
-    if (addr && typeof addr === 'object') {
-      baseUrl = `http://127.0.0.1:${addr.port}`;
-    }
-  });
+beforeAll(async () => {
+  _server = await startServer(3000);
+  const addr = _server.address();
+  if (addr && typeof addr === 'object') {
+    baseUrl = `http://127.0.0.1:${addr.port}`;
+  }
+});
 
-  afterAll(() => {
-    if (_server) _server.close();
-  });
+afterAll(() => {
+  if (_server) _server.close();
+});
 
 function get(
   path: string,

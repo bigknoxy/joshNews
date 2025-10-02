@@ -13,7 +13,7 @@ describe('Job service (unit)', () => {
     // job should exist
     const pending = js.getJob(jobId);
     expect(pending).not.toBeNull();
-    expect(['pending','running']).toContain(pending!.status);
+    expect(['pending', 'running']).toContain(pending!.status);
 
     // wait for completion
     await new Promise((r) => setTimeout(r, 30));

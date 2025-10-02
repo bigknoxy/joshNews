@@ -9,10 +9,13 @@ describe('Job service timeout', () => {
   it('marks job failed when timeout exceeded', async () => {
     const js = createJobService({ concurrency: 2, defaultTimeout: 5000 });
 
-    const id = js.startJob(async () => {
-      await sleep(50);
-      return { ok: true };
-    }, { timeout: 10 });
+    const id = js.startJob(
+      async () => {
+        await sleep(50);
+        return { ok: true };
+      },
+      { timeout: 10 },
+    );
 
     // wait enough for timeout to occur
     await sleep(30);

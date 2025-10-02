@@ -34,8 +34,10 @@ export function validateContentItem(input: any): ValidationResult {
     errors.push('url must be a valid url');
   }
   if (input.signal_explanations) {
-    if (!Array.isArray(input.signal_explanations)) errors.push('signal_explanations must be an array');
-    else if (input.signal_explanations.length > 3) errors.push('signal_explanations can have at most 3 items');
+    if (!Array.isArray(input.signal_explanations))
+      errors.push('signal_explanations must be an array');
+    else if (input.signal_explanations.length > 3)
+      errors.push('signal_explanations can have at most 3 items');
   }
   return { valid: errors.length === 0, errors };
 }

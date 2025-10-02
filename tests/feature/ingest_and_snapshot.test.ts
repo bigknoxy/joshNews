@@ -23,7 +23,9 @@ describe('Integration: add-source -> ingest -> snapshot', () => {
     expect(body.id).toBeDefined();
 
     // trigger a refresh/ingest
-    const refresh = await fetch('http://127.0.0.1:3001/api/v1/dashboards/daily/refresh', { method: 'POST' });
+    const refresh = await fetch('http://127.0.0.1:3001/api/v1/dashboards/daily/refresh', {
+      method: 'POST',
+    });
     expect(refresh.status).toBe(200);
 
     const snapRes = await fetch('http://127.0.0.1:3001/api/v1/dashboards/daily');
@@ -31,7 +33,10 @@ describe('Integration: add-source -> ingest -> snapshot', () => {
     const snap = await snapRes.json();
     expect(Array.isArray(snap.items)).toBeTruthy();
     // expect at least one item derived from the source we added
-    const found = snap.items.some((it: any) => it.signals && it.signals.source && it.signals.source.value === 'https://int.example/item');
+    const found = snap.items.some(
+      (it: any) =>
+        it.signals && it.signals.source && it.signals.source.value === 'https://int.example/item',
+    );
     expect(found).toBeTruthy();
   });
 });

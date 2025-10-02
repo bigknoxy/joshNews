@@ -2,7 +2,6 @@ import http from 'http';
 import { strict as assert } from 'assert';
 import { startTestServer, stopTestServer } from '../setup/server';
 
-
 let baseUrl = 'http://127.0.0.1:3000';
 
 beforeAll(async () => {

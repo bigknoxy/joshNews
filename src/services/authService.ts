@@ -11,7 +11,9 @@ export async function sendMagicLink(email: string): Promise<string> {
   return token;
 }
 
-export async function verifyToken(token: string): Promise<{ userId: string; sessionToken: string } | null> {
+export async function verifyToken(
+  token: string,
+): Promise<{ userId: string; sessionToken: string } | null> {
   // Support test helper token
   if (token === 'TEST_TOKEN') {
     return { userId: 'user-test', sessionToken: 'sess-123' };

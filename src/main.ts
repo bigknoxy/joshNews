@@ -16,11 +16,21 @@ if (process.env.SOURCES_ADAPTER === 'file') {
   // the tests will set adapter later if needed
 }
 
-
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 
-export function createServer() {
+export function createServer(): http.Server {
   return http.createServer(async (req, res) => {
+    // simple health endpoint
+    if (
+      req.method === 'GET' &&
+      req.url &&
+      new URL(req.url, `http://${req.headers.host}`).pathname === '/health'
+    ) {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/plain');
+      res.end('ok');
+      return;
+    }
     try {
       if (!req.url || !req.method) {
         res.statusCode = 404;
@@ -124,8 +134,7 @@ export function createServer() {
 
       // Leaderboard
       if (req.method === 'GET' && pathname === '/api/v1/leaderboard') {
-
-      // return empty array
+        // return empty array
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify([]));
@@ -142,7 +151,11 @@ export function createServer() {
         // @ts-expect-error: dynamic import for test-time wiring
         const { jobService } = await import('./services/jobRegistry');
         // support starting by type or by inline function
-        const jobId = jobService.startJob(data.type || (async () => ({ ok: true })), data.payload, data.options);
+        const jobId = jobService.startJob(
+          data.type || (async () => ({ ok: true })),
+          data.payload,
+          data.options,
+        );
         res.statusCode = 202;
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ jobId }));
