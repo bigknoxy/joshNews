@@ -5,8 +5,10 @@ import { Period } from './models/dashboardSnapshot';
 // Adapter-backed stores for sources
 import { validateSource } from './lib/validators';
 import { createMemoryAdapter } from './adapters/sourcesMemoryAdapter';
+import { setSourcesAdapter } from './lib/sourcesStore';
 
 let adapter: any = createMemoryAdapter();
+setSourcesAdapter(adapter);
 
 // adapter selection via env var (SOURCES_ADAPTER=file|memory)
 if (process.env.SOURCES_ADAPTER === 'file') {

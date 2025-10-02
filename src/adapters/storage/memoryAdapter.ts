@@ -31,20 +31,37 @@ export class MemoryAdapter {
   async refreshSnapshot(period: Period): Promise<DashboardSnapshot> {
     const existing = this.snapshots[period];
     const now = new Date().toISOString();
-    if (existing) {
-      const refreshed: DashboardSnapshot = {
-        ...existing,
-        id: `${period}-${Date.now()}`,
+    // perform ingest of sources into items
+    try {
+      // lazy import to avoid circular deps
+      // @ts-ignore
+      const { ingestAll } = await import('../../services/ingestService');
+      const items = await ingestAll();
+
+      const created: DashboardSnapshot = createSnapshot({
+        period,
         createdAt: now,
-        version: existing.version + 1,
-      };
-      this.snapshots[period] = refreshed;
-      return refreshed;
+        version: (existing?.version || 0) + 1,
+        items: items.map((it: any) => ({ contentItemId: it.contentItemId, score: it.score, signals: it.signals })),
+      });
+      this.snapshots[period] = created;
+      return created;
+    } catch (e) {
+      // fallback to previous behavior
+      if (existing) {
+        const refreshed: DashboardSnapshot = {
+          ...existing,
+          id: `${period}-${Date.now()}`,
+          createdAt: now,
+          version: existing.version + 1,
+        };
+        this.snapshots[period] = refreshed;
+        return refreshed;
+      }
+      const created: DashboardSnapshot = createSnapshot({ period, createdAt: now, version: 1 });
+      this.snapshots[period] = created;
+      return created;
     }
-    // create a new snapshot if none exists
-    const created: DashboardSnapshot = createSnapshot({ period, createdAt: now, version: 1 });
-    this.snapshots[period] = created;
-    return created;
   }
 }
 
