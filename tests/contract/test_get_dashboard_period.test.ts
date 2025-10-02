@@ -4,12 +4,11 @@ import { startTestServer, stopTestServer } from '../setup/server';
 
 // The test will start the server on an ephemeral port and call endpoints.
 
-let server: http.Server | null = null;
+
 let baseUrl = 'http://127.0.0.1:3000';
 
-beforeAll(async () => {
+  beforeAll(async () => {
   await startTestServer(3000);
-  server = await Promise.resolve(null);
   // server address handling is unnecessary when using startTestServer which binds to the requested port
   baseUrl = process.env.TEST_BASE_URL || 'http://127.0.0.1:3000';
 });

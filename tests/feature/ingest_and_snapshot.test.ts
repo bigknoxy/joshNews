@@ -1,15 +1,15 @@
 import { describe, it, expect, beforeAll, afterAll } from 'bun:test';
-import { startServer, stopServer } from '../../src/main';
+import { startServer } from '../../src/main';
 
-let server: any = null;
+let serverRef: any = null;
 
 describe('Integration: add-source -> ingest -> snapshot', () => {
   beforeAll(async () => {
-    server = await startServer(3001);
+    serverRef = await startServer(3001);
   });
 
   afterAll(async () => {
-    if (server) server.close();
+    if (serverRef) serverRef.close();
   });
 
   it('adds a source, ingests it, and snapshot contains an item', async () => {

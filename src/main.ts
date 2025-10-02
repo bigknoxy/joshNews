@@ -16,7 +16,6 @@ if (process.env.SOURCES_ADAPTER === 'file') {
   // the tests will set adapter later if needed
 }
 
-let nextSourceId = 1;
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 
@@ -49,7 +48,7 @@ export function createServer() {
         }
         try {
           // lazy import to avoid cycles in tests
-          // @ts-ignore
+          // @ts-expect-error: dynamic import to avoid circular dependency in tests
           const { sendMagicLink } = await import('./services/authService');
           const token = await sendMagicLink(email);
           res.statusCode = 202;
@@ -67,7 +66,7 @@ export function createServer() {
       if (req.method === 'GET' && pathname === '/api/v1/auth/verify') {
         const token = url.searchParams.get('token') || '';
         try {
-          // @ts-ignore
+          // @ts-expect-error: dynamic import to avoid circular dependency in tests
           const { verifyToken } = await import('./services/authService');
           const verified = await verifyToken(token);
           if (!verified) {
@@ -125,21 +124,45 @@ export function createServer() {
 
       // Leaderboard
       if (req.method === 'GET' && pathname === '/api/v1/leaderboard') {
-        const period = url.searchParams.get('period') || 'daily';
-        // return empty array
+
+      // return empty array
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify([]));
         return;
       }
 
-      // Jobs/items/users stubs used by tests
+      // Jobs endpoints using jobService
       const jobsMatch = pathname.match(/^\/api\/v1\/jobs\/(.+)$/);
+      if (req.method === 'POST' && pathname === '/api/v1/jobs') {
+        // start a job
+        let body = '';
+        for await (const chunk of req) body += chunk;
+        const data = body ? JSON.parse(body) : {};
+        // @ts-expect-error: dynamic import for test-time wiring
+        const { jobService } = await import('./services/jobRegistry');
+        // support starting by type or by inline function
+        const jobId = jobService.startJob(data.type || (async () => ({ ok: true })), data.payload, data.options);
+        res.statusCode = 202;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ jobId }));
+        return;
+      }
+
       if (req.method === 'GET' && jobsMatch) {
         const jobId = jobsMatch[1];
+        // @ts-expect-error: dynamic import for test-time wiring
+        const { jobService } = await import('./services/jobRegistry');
+        const j = jobService.getJob(jobId);
+        if (!j) {
+          res.statusCode = 404;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'not found' }));
+          return;
+        }
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ id: jobId, status: 'done' }));
+        res.end(JSON.stringify(j));
         return;
       }
 
@@ -211,7 +234,7 @@ export function createServer() {
 export async function startServer(port = PORT) {
   // initialize adapter if file-based
   if (process.env.SOURCES_ADAPTER === 'file') {
-    // @ts-ignore
+    // @ts-expect-error: dynamic import to avoid loading file adapter unless requested
     const { createFileAdapter } = await import('./adapters/sourcesFileAdapter');
     // choose a default file path
     adapter = await createFileAdapter('./data/sources.json');

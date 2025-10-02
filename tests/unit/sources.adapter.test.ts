@@ -12,13 +12,17 @@ describe('Sources adapters', () => {
   beforeEach(() => {
     try {
       if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR);
-    } catch (e) {}
+    } catch (e) {
+      // ignore filesystem race conditions in test setup
+    }
   });
 
   afterEach(() => {
     try {
       if (fs.existsSync(TEST_FILE)) fs.unlinkSync(TEST_FILE);
-    } catch (e) {}
+    } catch (e) {
+      // ignore unlink errors in test teardown
+    }
   });
 
   it('memory adapter: add and list with pagination', async () => {
