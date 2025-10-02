@@ -103,12 +103,12 @@ As a registered user I want to add links, RSS feeds, or topic keywords to my per
 
 _Marked ambiguities in functional scope:_
 
-- **FR-014**: Item limits per dashboard and exact bounding rules: [NEEDS CLARIFICATION: max items per day/weekly snapshot and prioritization rules]
+- **FR-014**: Item limits per dashboard and exact bounding rules: Maximum items per daily snapshot: 50 items. Maximum items per weekly snapshot: 200 items. Items are sorted by `score` in descending order. Items are deduplicated by `url` (normalized); when multiple items share the same `url`, keep the most recently ingested item (`ingested_at`). For items with equal `score` and different `url`s, break ties by `published_at` newest first.
 
 ### Non-functional Requirements
 
 - **NFR-001**: UI MUST be responsive and usable on mobile and desktop with a modern, minimal design.
-- **NFR-002**: Dashboard load time must be performant: initial page render under [NEEDS CLARIFICATION: target ms].
+- **NFR-002**: Dashboard load time must be performant: initial page render under 300ms p95 for cached snapshots.
 - **NFR-003**: System MUST scale to handle background ingestion for many feeds without blocking user requests.
 - **NFR-004**: Privacy & security: user data must be stored per-account and deletable on request; secrets (if any) must be stored securely.
 - **NFR-005**: Accessibility: core screens should meet basic a11y standards (contrast, keyboard navigation, screen reader labels).

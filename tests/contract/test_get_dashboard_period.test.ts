@@ -1,6 +1,6 @@
 import http from 'http';
 import { strict as assert } from 'assert';
-import { startServer } from '../../src/main';
+import { startTestServer, stopTestServer } from '../setup/server';
 
 // The test will start the server on an ephemeral port and call endpoints.
 
@@ -8,15 +8,14 @@ let server: http.Server | null = null;
 let baseUrl = 'http://127.0.0.1:3000';
 
 beforeAll(async () => {
-  server = await startServer(3000);
-  const addr = server.address();
-  if (addr && typeof addr === 'object') {
-    baseUrl = `http://127.0.0.1:${addr.port}`;
-  }
+  await startTestServer(3000);
+  server = await Promise.resolve(null);
+  // server address handling is unnecessary when using startTestServer which binds to the requested port
+  baseUrl = process.env.TEST_BASE_URL || 'http://127.0.0.1:3000';
 });
 
-afterAll(() => {
-  if (server) server.close();
+afterAll(async () => {
+  await stopTestServer();
 });
 
 function get(path: string): Promise<{ statusCode: number; body: string }> {

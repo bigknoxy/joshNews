@@ -1,227 +1,283 @@
-# Tasks: Dashboard Snapshot Feature
+# tasks.md (Phase 3 - Detailed Task List)
 
-**Input**: Design documents from `/specs/001-a-website-accessible/`
-**Prerequisites**: `plan.md` (required), `research.md`, `data-model.md`, `contracts/`, `quickstart.md`
+Path: /home/josh/projects/joshNews/specs/001-a-website-accessible/tasks.md
 
-## Execution Flow (main)
+This file contains an ordered list of tasks for Phase 3 of the "Website Accessible" feature. Tasks follow TDD ordering: tests first, then implementation. Each task includes an id, title, short description, owner, priority, estimate (in story points), and related file paths.
 
-1. Setup project skeleton and Bun + TypeScript tooling.
-2. Write failing tests (contract + integration + unit) per TDD before implementing code.
-3. Implement models, services, endpoints to make tests pass.
-4. Integrate storage adapter (in-memory for tests, production adapter later).
-5. Run lint/format and performance checks; finalize docs.
+Note: Owners: `developer-bun` indicates subagent responsible for Bun/TypeScript implementation; `general` indicates this subagent's responsibilities.
 
-## Task List
+1. id: T001
+   title: Add contract test for POST /api/v1/auth/magic-link
+   description: Create a failing contract test asserting POST /api/v1/auth/magic-link returns 202 and appropriate response shape.
+   owner: general
+   priority: high
+   estimate: 1
+   files:
 
-T001 Create project structure per implementation plan
+   - /home/josh/projects/joshNews/tests/contract/test_auth_magic_link.test.ts
 
-- Path: `/home/josh/projects/joshNews/`
-- Description: Add directories: `src/`, `src/models/`, `src/services/`, `src/api/`, `src/adapters/storage/`, `tests/contract/`, `tests/feature/`, `tests/unit/`, `tests/perf/`.
-- Dependencies: None
+2. id: T002
+   title: Add contract test for GET /api/v1/auth/verify
+   description: Create a failing contract test asserting GET /api/v1/auth/verify returns 200 with userId and sessionToken.
+   owner: general
+   priority: high
+   estimate: 1
+   files:
 
-T002 Initialize project using Bun and TypeScript (BUN + TS config) [P]
+   - /home/josh/projects/joshNews/tests/contract/test_auth_verify.test.ts
 
-- Path: `/home/josh/projects/joshNews/package.json`, `/home/josh/projects/joshNews/tsconfig.json`
-- Description: Run `bun init` then add scripts: `build`, `lint`, `format`, `test`. Create `tsconfig.json` with constitution requirements (`strict: true`, `noImplicitAny: true`, `forceConsistentCasingInFileNames: true`, `module: "esnext"`, `target: "ES2022"`).
-- Dependency: T001
-- Parallelizable: yes (different files)
-- Example Task agent command: Task("Initialize Bun and create tsconfig"), subagent: `@general`
+3. id: T003
+   title: Add contract tests for Sources CRUD
+   description: Create failing contract tests for POST /api/v1/sources (201) and GET /api/v1/sources (200) verifying basic CRUD contract.
+   owner: general
+   priority: high
+   estimate: 1
+   files:
 
-T003 Configure ESLint and Prettier with TypeScript support [P]
+   - /home/josh/projects/joshNews/tests/contract/test_sources_crud.test.ts
 
-- Path: `/home/josh/projects/joshNews/.eslintrc.json`, `/home/josh/projects/joshNews/.prettierrc`
-- Description: Add ESLint + `@typescript-eslint` config and Prettier config. Add `lint` and `format` scripts to `package.json`.
-- Dependency: T002
-- Parallelizable: yes
-- Command example: Task("Setup ESLint+Prettier" )
+4. id: T004
+   title: Add contract test for dashboards period endpoint
+   description: Create failing contract test for GET /api/v1/dashboards/daily asserting 200, max 50 items, sorted by score desc.
+   owner: general
+   priority: high
+   estimate: 1
+   files:
 
-T004 [P] Add contract test for GET /api/v1/dashboards/{period} (failing) [X]
+   - /home/josh/projects/joshNews/tests/contract/test_dashboards_period.test.ts
 
-- Path: `/home/josh/projects/joshNews/tests/contract/test_get_dashboard_period.test.ts`
-- Description: Create a contract test that calls `GET /api/v1/dashboards/daily` and `GET /api/v1/dashboards/weekly` and asserts the response schema matches `/specs/001-a-website-accessible/contracts/openapi.yaml`. Test must fail (no implementation yet).
-- Dependency: T002
-- Parallelizable: yes (contract tests are in separate files)
-- Command example: Task("Create contract test for GET dashboard" )
+5. id: T005
+   title: Add unit tests for data model validation rules
+   description: Create failing unit tests validating URL fields, `signal_explanations` length cap, required fields, and type constraints for data models.
+   owner: general
+   priority: high
+   estimate: 1
+   files:
 
-T005 [P] Add model creation task for `User` entity
+   - /home/josh/projects/joshNews/tests/unit/models/dataModel.validation.test.ts
+   - /home/josh/projects/joshNews/src/models/\*
 
-- Path: `/home/josh/projects/joshNews/src/models/user.ts`
-- Description: Create TypeScript model for `User` with fields: `id: string`, `email: string`, `createdAt: string`, `lastActiveAt: string`, `preferences: Record<string, any>`. Include basic validation tests in `tests/unit/test_models.ts` (failing initially).
-- Dependency: T001, T002
-- Parallelizable: yes
-- Command example: Task("Create User model")
-- Status: Completed — implemented `src/models/user.ts` and unit tests pass.
+6. id: T006
+   title: Implement auth magic-link endpoint (stub)
+   description: Implement minimal POST /api/v1/auth/magic-link returning 202 to satisfy contract test. Keep logic minimal and well-typed.
+   owner: developer-bun
+   priority: high
+   estimate: 2
+   files:
 
-T006 [P] Add model creation task for `ContentItem` entity
+   - /home/josh/projects/joshNews/src/routes/auth.ts
+   - /home/josh/projects/joshNews/src/server.ts
 
-- Path: `/home/josh/projects/joshNews/src/models/contentItem.ts`
-- Description: Create TypeScript model for `ContentItem` with fields: `id`, `title`, `source`, `publishedAt`, `ingestedAt`, `metadata`.
-- Dependency: T001, T002
-- Parallelizable: yes
-- Command example: Task("Create ContentItem model")
-- Status: Completed — implemented `src/models/contentItem.ts` and unit tests pass.
+7. id: T007
+   title: Implement auth verify endpoint (stub)
+   description: Implement minimal GET /api/v1/auth/verify returning 200 with userId and sessionToken placeholders.
+   owner: developer-bun
+   priority: high
+   estimate: 2
+   files:
 
-T007 [P] Add model creation task for `DashboardSnapshot` and `SnapshotItem`
+   - /home/josh/projects/joshNews/src/routes/auth.ts
+   - /home/josh/projects/joshNews/src/server.ts
 
-- Path: `/home/josh/projects/joshNews/src/models/dashboardSnapshot.ts`
-- Description: Create TypeScript models for `DashboardSnapshot` and `SnapshotItem` following `data-model.md` (include `period` enum, `items` array, `createdAt`). Ensure snapshot includes version field for optimistic locking.
-- Dependency: T001, T002
-- Parallelizable: yes
-- Command example: Task("Create DashboardSnapshot model")
+8. id: T008
+   title: Implement Sources POST + GET endpoints (stub)
+   description: Implement minimal POST /api/v1/sources (returns 201) and GET /api/v1/sources (returns 200) with in-memory store for dev.
+   owner: developer-bun
+   priority: high
+   estimate: 2
+   files:
 
-T008 Create integration test for quickstart scenario 'fetch cached snapshot' (failing)
+   - /home/josh/projects/joshNews/src/routes/sources.ts
+   - /home/josh/projects/joshNews/src/services/sourceService.ts
 
-- Path: `/home/josh/projects/joshNews/tests/feature/fetch_snapshot.test.ts`
-- Description: Implement an integration test that simulates fetching a cached daily snapshot via `GET /api/v1/dashboards/daily` and verifies response contains `id, period, startAt, endAt, items` with correct shapes. Test must be written to fail until implementation exists.
-- Dependency: T004, T007
-- Parallelizable: no (shares files with other integration tests if present)
-- Command example: Task("Create integration test fetch_cached_snapshot")
+9. id: T009
+   title: Implement dashboard daily endpoint (stub)
+   description: Implement GET /api/v1/dashboards/daily returning 200 and placeholder list; ensure sorting and cap behavior later in tests.
+   owner: developer-bun
+   priority: high
+   estimate: 2
+   files:
 
-T009 Implement Dashboard service (read-only) in `src/services/dashboardService.ts`
+   - /home/josh/projects/joshNews/src/routes/dashboards.ts
+   - /home/josh/projects/joshNews/src/services/dashboardService.ts
 
-- Path: `/home/josh/projects/joshNews/src/services/dashboardService.ts`
-- Description: Implement service methods `getSnapshot(period: 'daily'|'weekly'): Promise<DashboardSnapshot | null>` that read from storage adapter. Start with in-memory adapter for tests.
-- Dependency: T007, T011
-- Parallelizable: no (depends on model file)
-- Command example: Task("Implement DashboardService")
-- Status: Completed — added `src/services/dashboardService.ts` with `getSnapshot(period)` delegating to the in-memory adapter.
+10. id: T010
+    title: Implement data-model validation (types + runtime checks)
+    description: Add TypeScript interfaces and runtime validation helpers for models (Source, ContentItem, User) enforcing URL, arrays, and caps.
+    owner: developer-bun
+    priority: high
+    estimate: 2
+    files:
 
-T010 Implement GET /api/v1/dashboards/{period} endpoint
+    - /home/josh/projects/joshNews/src/models/dataModel.ts
+    - /home/josh/projects/joshNews/src/lib/validators.ts
 
-- Path: `/home/josh/projects/joshNews/src/api/dashboards.ts`
-- Description: Add HTTP handler that calls `dashboardService.getSnapshot(period)` and returns 200 with snapshot or 404. Wire into app's routing entry (e.g., `src/api/index.ts` or `src/main.ts`).
-- Dependency: T009
-- Parallelizable: no
-- Command example: Task("Implement GET dashboard endpoint")
-- Status: Completed — added `src/api/dashboards.ts` and wired basic handler into `src/main.ts` for GET /api/v1/dashboards/{period}.
+11. id: T011
+    title: Add integration test for add-source -> ingest -> snapshot flow
+    description: Create an end-to-end failing integration test that will be implemented after minimal endpoints exist.
+    owner: general
+    priority: med
+    estimate: 2
+    files:
 
-T011 Connect DashboardService to storage adapter (in-memory for tests)
+    - /home/josh/projects/joshNews/tests/integration/test_end_to_end_snapshot.test.ts
 
-- Path: `/home/josh/projects/joshNews/src/adapters/storage/memoryAdapter.ts`
-- Description: Implement a simple in-memory adapter exposing `getSnapshot(period)` used by `DashboardService`. Seed with a sample snapshot used by contract/integration tests.
-- Dependency: T007
-- Parallelizable: yes
-- Command example: Task("Add in-memory storage adapter")
-- Status: Completed — `src/adapters/storage/memoryAdapter.ts` provides seeded daily and weekly snapshots and `getSnapshot`/`setSnapshot` helpers.
+12. id: T012
+    title: Add background fetcher job scaffold
+    description: Add FetchJob skeleton that will later poll sources and persist items; include retry/backoff plan.
+    owner: developer-bun
+    priority: med
+    estimate: 2
+    files:
 
-T012 Add unit tests for model validation
+    - /home/josh/projects/joshNews/src/jobs/fetchJob.ts
 
-- Path: `/home/josh/projects/joshNews/tests/unit/test_models.ts`
-- Description: Add unit tests that validate model serialization/validation for `User`, `ContentItem`, and `DashboardSnapshot`. Tests should initially fail if models are not implemented.
-- Dependency: T005,T006,T007
-- Parallelizable: yes
-- Command example: Task("Add unit tests for models")
+13. id: T013
+    title: Add persistence adapters (memory + file)
+    description: Implement in-memory adapter for tests and lightweight file adapter for local dev persistence.
+    owner: developer-bun
+    priority: med
+    estimate: 2
+    files:
 
-T013 Performance test: SSR render of cached snapshots <300ms p95
+    - /home/josh/projects/joshNews/src/adapters/memoryAdapter.ts
+    - /home/josh/projects/joshNews/src/adapters/fileAdapter.ts
 
-- Path: `/home/josh/projects/joshNews/tests/perf/test_ssr_perf.ts`
-- Description: Create a lightweight performance test that measures a mock SSR render using cached snapshot and asserts p95 < 300ms. Use a small harness that can run in CI; mark as polish.
-- Dependency: T010
-- Parallelizable: no
-- Command example: Task("Add SSR performance test")
+14. id: T014
+    title: Add snapshot generator service
+    description: Implement snapshot generation with dedupe, scoring, and limit caps for daily/weekly snapshots (stubbed logic first).
+    owner: developer-bun
+    priority: med
+    estimate: 3
+    files:
 
-T014 Update `quickstart.md` with test running instructions
+    - /home/josh/projects/joshNews/src/services/snapshotService.ts
 
-- Path: `/home/josh/projects/joshNews/specs/001-a-website-accessible/quickstart.md`
-- Description: Add commands: `bun install`, `bun run lint -- --fix`, `bun run format`, `bun test` and describe how to run the new contract and integration tests.
-- Dependency: T002, T003, T004
-- Parallelizable: yes
-- Command example: Task("Update quickstart.md")
+15. id: T015
+    title: Add tests for snapshot dedupe and ordering
+    description: Unit and integration tests that assert snapshot dedupe, scoring, and ordering behavior.
+    owner: general
+    priority: med
+    estimate: 2
+    files:
 
-## Ordering & Dependencies Summary
+    - /home/josh/projects/joshNews/tests/unit/services/snapshot.service.test.ts
 
-- Setup: T001 → T002 → T003
-- Tests (T004, T012) must be written and fail before T009-T010 implementation (TDD)
-- Models: T005-T007 before DashboardService (T009)
-- Storage adapter: T011 before DashboardService completes
-- Integration tests: T008 requires T004 and T011
-- Performance & Polish: T013, T014 after implementation
+16. id: T016
+    title: Wire server startup helper for tests
+    description: Ensure `/tests/setup/server.ts` integrates with app entrypoint and returns stop function for tests.
+    owner: developer-bun
+    priority: med
+    estimate: 1
+    files:
 
-## Parallel Execution Groups (examples)
+    - /home/josh/projects/joshNews/tests/setup/server.ts
+    - /home/josh/projects/joshNews/src/main.ts
 
-- Group A (can run simultaneously): T002, T003, T005, T006, T007
-  - Example agent commands:
-    - Task("Initialize Bun and tsconfig")
-    - Task("Setup ESLint+Prettier")
-    - Task("Create User model")
-    - Task("Create ContentItem model")
-    - Task("Create DashboardSnapshot model")
-- Group B (contract tests): T004 (independent file)
-- Group C (unit tests): T012 (independent)
+17. id: T017
+    title: Add CI workflow for Bun commands
+    description: Add GitHub Actions workflow that runs `bun install`, `bun run lint -- --fix`, `bun run format --check`, and `bun test`.
+    owner: developer-bun
+    priority: med
+    estimate: 2
+    files:
 
-## Actual Task Agent Commands
+    - /home/josh/projects/joshNews/.github/workflows/ci.yml
 
-- Task("Initialize Bun and create tsconfig" , subagent_type="general")
-- Task("Setup ESLint and Prettier", subagent_type="general")
-- Task("Create contract test for GET /api/v1/dashboards/{period}", subagent_type="general")
-- Task("Create DashboardSnapshot model and SnapshotItem", subagent_type="general")
-- Task("Add in-memory storage adapter", subagent_type="general")
+18. id: T018
+    title: Lint and format checks in pre-commit
+    description: Add Husky or simple pre-commit script to run `bun run format` and `bun run lint -- --fix` before commits.
+    owner: developer-bun
+    priority: low
+    estimate: 1
+    files:
 
-T015 [P] Add OpenAPI contract: auth (`auth.yaml`)
+    - /home/josh/projects/joshNews/package.json
+    - /home/josh/projects/joshNews/.husky/\*
 
-- Path: `/home/josh/projects/joshNews/specs/001-a-website-accessible/contracts/auth.yaml`
-- Description: Add OpenAPI definitions for `POST /api/v1/auth/magic-link` and `GET /api/v1/auth/verify`.
-- Dependency: T002
-- Parallelizable: yes
+19. id: T019
+    title: Add README quickstart for running tests and server
+    description: Update quickstart with commands to run server, run contract tests, and start background jobs locally.
+    owner: general
+    priority: low
+    estimate: 1
+    files:
 
-T016 [P] Add contract tests for auth
+    - /home/josh/projects/joshNews/README.md
+    - /home/josh/projects/joshNews/specs/001-a-website-accessible/quickstart.md
 
-- Path: `/home/josh/projects/joshNews/tests/contract/test_auth_magic_link.test.ts`, `/home/josh/projects/joshNews/tests/contract/test_auth_verify.test.ts`
-- Description: Failing contract test stubs for auth endpoints.
-- Dependency: T015
-- Parallelizable: yes
+20. id: T020
+    title: Add detailed API contracts (OpenAPI snippets)
+    description: Author OpenAPI fragments for auth, sources, and dashboards to drive contract tests.
+    owner: general
+    priority: low
+    estimate: 2
+    files:
 
-T017 [P] Add OpenAPI contract: sources (`sources.yaml`)
+    - /home/josh/projects/joshNews/specs/001-a-website-accessible/contracts/auth.yaml
+    - /home/josh/projects/joshNews/specs/001-a-website-accessible/contracts/sources.yaml
+    - /home/josh/projects/joshNews/specs/001-a-website-accessible/contracts/dashboards.yaml
 
-- Path: `/home/josh/projects/joshNews/specs/001-a-website-accessible/contracts/sources.yaml`
-- Description: Add OpenAPI definitions for `POST /api/v1/sources`, `GET /api/v1/sources`, `PUT /api/v1/sources/{id}`, `DELETE /api/v1/sources/{id}`.
-- Dependency: T002
-- Parallelizable: yes
+21. id: T021
+    title: Add observability hooks for request timing
+    description: Add basic middleware to record request durations for dashboard endpoints for later perf tuning.
+    owner: developer-bun
+    priority: low
+    estimate: 1
+    files:
 
-T018 [P] Add contract tests for sources CRUD
+    - /home/josh/projects/joshNews/src/middleware/metrics.ts
 
-- Path: `/home/josh/projects/joshNews/tests/contract/test_sources_crud.test.ts`
-- Description: Failing contract test stubs for sources CRUD.
-- Dependency: T017
-- Parallelizable: yes
+22. id: T022
+    title: E2E smoke test for primary user flow
+    description: Add a simple E2E test that signs up via magic link, verifies, adds a source, and fetches dashboard.
+    owner: general
+    priority: low
+    estimate: 3
+    files:
 
-T019 [P] Add OpenAPI contracts: items/actions, leaderboard, export, jobs
+    - /home/josh/projects/joshNews/tests/e2e/test_user_flow.smoke.test.ts
 
-- Path: `/home/josh/projects/joshNews/specs/001-a-website-accessible/contracts/items.yaml`, `/home/josh/projects/joshNews/specs/001-a-website-accessible/contracts/leaderboard.yaml`, `/home/josh/projects/joshNews/specs/001-a-website-accessible/contracts/export.yaml`, `/home/josh/projects/joshNews/specs/001-a-website-accessible/contracts/jobs.yaml`
-- Description: Add minimal OpenAPI definitions for item actions, leaderboard, export/delete, and job status endpoints.
-- Dependency: T002
-- Parallelizable: yes
+23. id: T023
+    title: Add security review task for auth endpoints
+    description: Review magic-link and verify endpoints for token leaks and ensure minimal cryptographic hygiene.
+    owner: developer-bun
+    priority: low
+    estimate: 1
+    files:
 
-T020 [P] Add contract tests for items/leaderboard/export/jobs
+    - /home/josh/projects/joshNews/specs/001-a-website-accessible/security.md
 
-- Path: `/home/josh/projects/joshNews/tests/contract/test_items_actions.test.ts`, `/home/josh/projects/joshNews/tests/contract/test_leaderboard.test.ts`, `/home/josh/projects/joshNews/tests/contract/test_export_delete.test.ts`, `/home/josh/projects/joshNews/tests/contract/test_jobs_status.test.ts`
-- Description: Failing contract test stubs for the above contracts.
-- Dependency: T019
-- Parallelizable: yes
+24. id: T024
+    title: Add tests for pagination and caps on sources listing
+    description: Ensure GET /api/v1/sources supports pagination and caps with tests to prevent huge responses.
+    owner: general
+    priority: low
+    estimate: 1
+    files:
 
-## Validation Checklist
+    - /home/josh/projects/joshNews/tests/contract/test_sources_pagination.test.ts
 
-- [ ] Contract tests exist for every endpoint in `contracts/openapi.yaml` (T004)
-- [x] Models exist for every entity in `data-model.md` up to T007 (T005-T007)
-- [x] Tests written (T004, T008) and executed
-- [ ] Parallel tasks are truly independent where marked [P]
-- [ ] All tasks reference exact file paths
+25. id: T025
+    title: Polish type definitions and export surfaces
+    description: Ensure all public modules have complete TypeScript types and re-export index files for clean imports.
+    owner: developer-bun
+    priority: low
+    estimate: 2
+    files:
 
-## Progress Tracking (automation)
+    - /home/josh/projects/joshNews/src/models/index.ts
+    - /home/josh/projects/joshNews/src/services/index.ts
 
-- [x] T001 Create project structure per implementation plan
-- [x] T002 Initialize project using Bun and TypeScript (BUN + TS config)
-- [x] T003 Configure ESLint and Prettier with TypeScript support
-- [x] T021 Create `Source` model and tests (scaffold)
-- [x] T004 Add contract test for GET /api/v1/dashboards/{period} (failing)
-- [x] T007 Create `DashboardSnapshot` model and tests
-- [x] T009 Implement Dashboard service (read-only)
-- [x] T010 Implement GET /api/v1/dashboards/{period}
-- [x] T011 Connect DashboardService to storage adapter (in-memory for tests)
-- [x] T022 Implement POST /api/v1/dashboards/{period}/refresh (completed)
-
-T022: Implemented POST refresh endpoint, added dashboardService.refreshSnapshot, memoryAdapter.refreshSnapshot, and tests passing.
+26. id: T026
+    title: Add changelog entry for feature kickoff
+    description: Add an initial changelog record documenting Phase 3 tasks and key design decisions.
+    owner: general
+    priority: low
+    estimate: 1
+    files:
+    - /home/josh/projects/joshNews/CHANGELOG.md
 
 ---
 
-Generated from: `/home/josh/projects/joshNews/specs/001-a-website-accessible/plan.md` and supporting docs
+Generated: Phase 3 task list prepared following TDD ordering. Begin by implementing tasks T001-T005 (contract & unit tests) then proceed to T006-T010 (stubs/implementations) to make tests pass.

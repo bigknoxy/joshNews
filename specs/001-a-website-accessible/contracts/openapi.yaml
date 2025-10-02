@@ -6,6 +6,9 @@ paths:
   /api/v1/dashboards/{period}:
     get:
       summary: Get dashboard snapshot
+      description: |-
+        Returns a precomputed dashboard snapshot for the requested `period` (`daily` or `weekly`).
+        The `items` array is ordered by `score` in descending order and is subject to per-period caps: daily snapshots are limited to 50 items and weekly snapshots to 200 items. Items are deduplicated by normalized `url`; when multiple items share the same `url`, the most recently ingested item (`ingested_at`) is kept. For items with equal `score` and different `url`s, ties are broken by `published_at` (newest first).
       parameters:
         - name: period
           in: path

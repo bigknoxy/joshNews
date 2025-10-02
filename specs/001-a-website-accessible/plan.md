@@ -45,7 +45,6 @@
 **Project Type**: [single/web/mobile - determines source structure]  
 **Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
 **Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Defaults**: - Item limits: max 50 items per daily snapshot, 200 per weekly snapshot. - Page-load target: initial SSR render < 300ms p95 for cached snapshots. - Fabric usage: No Fabric ingestion for Phase 1 (opt-in later). - Concurrency rules: Last-writer-wins for snapshot writes; optimistic locking for edits.
 **Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
 
 ## Constitution Check
@@ -230,27 +229,20 @@ _This checklist is updated during execution flow_
 
 **Phase Status**:
 
-- [ ] Phase 0: Research complete (/plan command)
-- [ ] Phase 1: Design complete (/plan command)
-- [ ] Phase 2: Task planning complete (/plan command - describe approach only)
-- [ ] Phase 3: Tasks generated (/tasks command)
+- [x] Phase 0: Research complete (/plan command)
+- [x] Phase 1: Design complete (/plan command)
+- [x] Phase 2: Task planning complete (/plan command - describe approach only)
+- [~] Phase 3: in_progress (Tasks generated and tests added)
 - [ ] Phase 4: Implementation complete
 - [ ] Phase 5: Validation passed
 
 **Gate Status**:
 
-- [ ] Initial Constitution Check: PASS
-- [ ] Post-Design Constitution Check: PASS
-- [ ] All NEEDS CLARIFICATION resolved
+- [x] Initial Constitution Check: PASS
+- [x] Post-Design Constitution Check: PASS
+- [x] All NEEDS CLARIFICATION resolved
 - [ ] Complexity deviations documented
 
 ---
 
 _Based on Constitution v2.1.1 - See `/memory/constitution.md`_
-
-**Defaults:**
-
-- Item limits: daily=50, weekly=200
-- Page-load target: SSR < 300ms p95 (cached snapshots)
-- Fabric: disabled for Phase 1
-- Concurrency: last-writer-wins for snapshots; optimistic locking for edits

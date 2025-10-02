@@ -1,20 +1,17 @@
 import http from 'http';
 import { strict as assert } from 'assert';
-import { startServer } from '../../src/main';
+import { startTestServer, stopTestServer } from '../setup/server';
 
-let server: http.Server | null = null;
+const server: http.Server | null = null;
 let baseUrl = 'http://127.0.0.1:3000';
 
 beforeAll(async () => {
-  server = await startServer(3000);
-  const addr = server.address();
-  if (addr && typeof addr === 'object') {
-    baseUrl = `http://127.0.0.1:${addr.port}`;
-  }
+  await startTestServer(3000);
+  baseUrl = 'http://127.0.0.1:3000';
 });
 
-afterAll(() => {
-  if (server) server.close();
+afterAll(async () => {
+  await stopTestServer();
 });
 
 function post(path: string): Promise<{ statusCode: number; body: string }> {

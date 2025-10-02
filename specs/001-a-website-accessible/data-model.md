@@ -83,6 +83,9 @@
 ## Per-period Defaults
 
 - Daily snapshot item limit: max 50 items.
+
+Maximum items per daily snapshot: 50 items. Maximum items per weekly snapshot: 200 items. Items are sorted by `score` in descending order. Items are deduplicated by `url` (normalized); when multiple items share the same `url`, keep the most recently ingested item (`ingested_at`). For items with equal `score` and different `url`s, break ties by `published_at` newest first.
+
 - Weekly snapshot item limit: max 200 items.
 
 ## Retention & Indexing
@@ -96,6 +99,9 @@
 - Scoring fields are versioned: `algorithm_version` is stored on both `Metric` and `DashboardSnapshot` to ensure reproducible snapshots.
 - Aggregation thresholds: only show public leaderboard if >= 5 distinct users contributed (spec suggests 3, plan suggests 5 — reconcile with product owner; plan currently uses 5).
 - Page-load performance target: initial SSR render of cached snapshots should be < 300ms p95.
+
+Dashboard SSR initial render target: initial page render under 300ms p95 for cached snapshots.
+
 - Fabric ingestion: Disabled for Phase 1 (opt-in in later phases).
 - Concurrency: Snapshot writes follow last-writer-wins; snapshot edits use optimistic locking with a `version` field.
 
