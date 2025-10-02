@@ -1,0 +1,24 @@
+# Bun + TypeScript project ignores
+node_modules/
+bun.lock
+dist/
+build/
+.env
+.DS_Store
+data/
+
+# TypeScript / build caches
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
