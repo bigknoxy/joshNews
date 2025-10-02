@@ -83,6 +83,14 @@ export function createServer() {
         let body = '';
         for await (const chunk of req) body += chunk;
         const data = body ? JSON.parse(body) : {};
+        // validate
+        const v = validateSource(data);
+        if (!v.valid) {
+          res.statusCode = 400;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'invalid', errors: v.errors }));
+          return;
+        }
         const id = `s-${nextSourceId++}`;
         const item = { id, ...data };
         sources.push(item);
@@ -93,9 +101,16 @@ export function createServer() {
       }
 
       if (pathname === '/api/v1/sources' && req.method === 'GET') {
+        const limitParam = Number(url.searchParams.get('limit') || '100');
+        const offsetParam = Number(url.searchParams.get('offset') || '0');
+        const requested = Number.isFinite(limitParam) ? Math.max(0, limitParam) : 100;
+        const offset = Number.isFinite(offsetParam) ? Math.max(0, offsetParam) : 0;
+        const cap = 100;
+        const actualLimit = Math.min(requested, cap);
+        const slice = sources.slice(offset, offset + actualLimit);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(sources));
+        res.end(JSON.stringify(slice));
         return;
       }
 
