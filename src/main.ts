@@ -2,11 +2,19 @@ import http from 'http';
 import { dashboardService } from './services/dashboardService';
 import { Period } from './models/dashboardSnapshot';
 
-// Minimal in-memory stores for contract test stubs
-const sources: any[] = [];
-let nextSourceId = 1;
-
+// Adapter-backed stores for sources
 import { validateSource } from './lib/validators';
+import { createMemoryAdapter } from './adapters/sourcesMemoryAdapter';
+
+let adapter: any = createMemoryAdapter();
+
+// adapter selection via env var (SOURCES_ADAPTER=file|memory)
+if (process.env.SOURCES_ADAPTER === 'file') {
+  // lazy-load file adapter when used in server startup
+  // the tests will set adapter later if needed
+}
+
+let nextSourceId = 1;
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 
@@ -91,12 +99,11 @@ export function createServer() {
           res.end(JSON.stringify({ error: 'invalid', errors: v.errors }));
           return;
         }
-        const id = `s-${nextSourceId++}`;
-        const item = { id, ...data };
-        sources.push(item);
+        // use adapter
+        const rec = await adapter.addSource(data);
         res.statusCode = 201;
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ id }));
+        res.end(JSON.stringify({ id: rec.id }));
         return;
       }
 
@@ -107,10 +114,10 @@ export function createServer() {
         const offset = Number.isFinite(offsetParam) ? Math.max(0, offsetParam) : 0;
         const cap = 100;
         const actualLimit = Math.min(requested, cap);
-        const slice = sources.slice(offset, offset + actualLimit);
+        const list = await adapter.listSources(offset, actualLimit);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(slice));
+        res.end(JSON.stringify(list));
         return;
       }
 
@@ -199,7 +206,15 @@ export function createServer() {
   });
 }
 
-export function startServer(port = PORT) {
+export async function startServer(port = PORT) {
+  // initialize adapter if file-based
+  if (process.env.SOURCES_ADAPTER === 'file') {
+    // @ts-ignore
+    const { createFileAdapter } = await import('./adapters/sourcesFileAdapter');
+    // choose a default file path
+    adapter = await createFileAdapter('./data/sources.json');
+  }
+
   const server = createServer();
   return new Promise<http.Server>((resolve) => {
     server.listen(port, () => resolve(server));
