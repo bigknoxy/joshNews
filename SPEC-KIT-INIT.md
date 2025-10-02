@@ -262,6 +262,7 @@ How an LLM should use this file
 - For content generation, the LLM can reference `.opencode/command/*.md` files (these are now the prompts) and use them as the basis for step execution.
 
 **Actions Performed by Automated Runner**
+
 - **Install**: piped the official installer and auto-confirmed prompts (used `yes | bash` / `yes y | uvx`) to make installation and initialization non-interactive.
 - **Path**: ensured `~/.local/bin` was added to the running shell's `PATH` so `uvx` could be executed without modifying user RC files.
 - **Init**: executed `uvx --from git+https://github.com/github/spec-kit.git specify init --here --ignore-agent-tools --ai copilot --script sh --debug` and automatically accepted the interactive "Do you want to continue?" confirmation so the initializer could complete.

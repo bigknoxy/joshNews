@@ -1,0 +1,31 @@
+openapi: 3.0.0
+info:
+  title: Leaderboard API
+  version: 0.1.0
+paths:
+  /api/v1/leaderboard:
+    get:
+      summary: Get aggregated top-rated items
+      parameters:
+        - name: period
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [daily, weekly]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    score:
+                      type: number
+                    metadata:
+                      type: object
