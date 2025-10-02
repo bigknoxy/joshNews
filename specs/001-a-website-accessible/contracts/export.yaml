@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: Export & Deletion API
+  version: 0.1.0
+paths:
+  /api/v1/users/{userId}/export:
+    get:
+      summary: Request export of user's subscriptions/data as CSV
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Export ready
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  downloadUrl:
+                    type: string
+  /api/v1/users/{userId}/data:
+    delete:
+      summary: Delete all user data (asynchronous)
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Deletion started
+  /api/v1/users/{userId}/data-status:
+    get:
+      summary: Check deletion job status
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  lastUpdated:
+                    type: string
+                    format: date-time

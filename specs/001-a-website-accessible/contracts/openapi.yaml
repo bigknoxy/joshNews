@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Dashboard API
+  version: 0.1.0
+paths:
+  /api/v1/dashboards/{period}:
+    get:
+      summary: Get dashboard snapshot
+      parameters:
+        - name: period
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [daily, weekly]
+      responses:
+        '200':
+          description: Snapshot retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  period:
+                    type: string
+                  startAt:
+                    type: string
+                    format: date-time
+                  endAt:
+                    type: string
+                    format: date-time
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        contentItemId:
+                          type: string
+                        score:
+                          type: number
+                        signals:
+                          type: object
+        '404':
+          description: Not found

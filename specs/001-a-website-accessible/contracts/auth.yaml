@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Auth API
+  version: 0.1.0
+paths:
+  /api/v1/auth/magic-link:
+    post:
+      summary: Request a magic link email for passwordless login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+              required: [email]
+      responses:
+        '202':
+          description: Accepted (magic link queued)
+  /api/v1/auth/verify:
+    get:
+      summary: Verify magic link token and return session
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Verification successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                  sessionToken:
+                    type: string
+                required: [userId, sessionToken]
+        '400':
+          description: Invalid token
