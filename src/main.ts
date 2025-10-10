@@ -2,6 +2,7 @@ import http from 'http';
 // Adapter-backed stores for sources
 import { createMemoryAdapter } from './adapters/sourcesMemoryAdapter';
 import { setSourcesAdapter } from './lib/sourcesStore';
+import { createLogger } from './cli/logger';
 
 let adapter: any = createMemoryAdapter();
 setSourcesAdapter(adapter);
@@ -183,5 +184,6 @@ export async function startServer(port = PORT) {
 }
 
 if (require.main === module) {
-  startServer().then(() => console.log(`Server listening on ${PORT}`));
+  const logger = createLogger();
+  startServer().then(() => logger.info(`Server listening on ${PORT}`));
 }
