@@ -12,17 +12,6 @@ describe('CLI serve', () => {
       detached: true,
     });
 
-    let stdout = '';
-    let stderr = '';
-
-    child.stdout?.on('data', (data) => {
-      stdout += data.toString();
-    });
-
-    child.stderr?.on('data', (data) => {
-      stderr += data.toString();
-    });
-
     // Wait for server to start (assume it logs something)
     await sleep(2000); // Adjust based on startup time
 

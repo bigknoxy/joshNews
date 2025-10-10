@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeAll, afterAll } from 'bun:test';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { startTestServer, stopTestServer } from '../setup/server';
+import { startTestServer } from '../setup/server';
 
 const execAsync = promisify(exec);
 

@@ -1,16 +1,16 @@
 import { describe, test, expect, beforeAll, afterAll } from 'bun:test';
-import { startTestServer, stopTestServer } from '../setup/server';
+import { startTestServer } from '../setup/server';
 
 describe('GET /sources', () => {
-  let stopServer: () => Promise<void>;
+  let _stopServer: () => Promise<void>;
 
   beforeAll(async () => {
     process.env.TEST_STORAGE = 'memory';
-    stopServer = await startTestServer();
+    _stopServer = await startTestServer();
   });
 
   afterAll(async () => {
-    await stopServer();
+    await _stopServer();
     delete process.env.TEST_STORAGE;
   });
 
