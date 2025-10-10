@@ -67,6 +67,16 @@ export function createServer(): http.Server {
         }
       }
 
+      // Items
+      if (req.method === 'GET' && pathname === '/api/v1/items') {
+        const { ingestAll } = await import('./services/ingestService');
+        const items = await ingestAll();
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(items));
+        return;
+      }
+
       // Leaderboard
       if (req.method === 'GET' && pathname === '/api/v1/leaderboard') {
         // return empty array

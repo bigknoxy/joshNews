@@ -1,0 +1,26 @@
+openapi: 3.0.0
+info:
+  title: joshNews - Sources API (MVP)
+  version: 0.1.0
+paths:
+  /sources:
+    get:
+      summary: List sources
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    url:
+                      type: string
+                    enabled:
+                      type: boolean

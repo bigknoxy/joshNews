@@ -1,0 +1,17 @@
+openapi: 3.0.0
+info:
+  title: joshNews API (MVP)
+  version: 0.1.0
+paths:
+  /sources:
+    get:
+      summary: List sources
+  /items:
+    get:
+      summary: List items
+  /jobs:
+    post:
+      summary: Start job
+  /jobs/{id}:
+    get:
+      summary: Job status

@@ -1,0 +1,34 @@
+openapi: 3.0.0
+info:
+  title: joshNews - Items API (MVP)
+  version: 0.1.0
+paths:
+  /items:
+    get:
+      summary: List content items
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    sourceId:
+                      type: string
+                    title:
+                      type: string
+                    url:
+                      type: string
+                    publishedAt:
+                      type: string
+                      format: date-time
