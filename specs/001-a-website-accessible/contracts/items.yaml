@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Items & Actions API
+  version: 0.1.0
+paths:
+  /api/v1/items/{id}/actions:
+    post:
+      summary: Perform an action on an item (save, dismiss, annotate)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum: [save, dismiss, annotate]
+                annotation:
+                  type: string
+      responses:
+        '200':
+          description: Action accepted

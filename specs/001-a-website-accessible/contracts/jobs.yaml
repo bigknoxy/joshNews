@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: Jobs API
+  version: 0.1.0
+paths:
+  /api/v1/jobs/{jobId}:
+    get:
+      summary: Get status of background job (fetch/enrichment/snapshot)
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  status:
+                    type: string
+                    enum: [pending, running, succeeded, failed]
+                  lastRun:
+                    type: string
+                    format: date-time
+                  error:
+                    type: string
+                    nullable: true
