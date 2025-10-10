@@ -34,7 +34,6 @@ export class MemoryAdapter {
     // perform ingest of sources into items
     try {
       // lazy import to avoid circular deps
-      // @ts-expect-error: dynamic import to avoid circular dependency in tests
       const { ingestAll } = await import('../../services/ingestService');
       const items = await ingestAll();
 

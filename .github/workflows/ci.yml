@@ -15,5 +15,11 @@ jobs:
         run: bun install
       - name: Run tests
         run: bun test --coverage
-      - name: Run lint
-        run: bun run lint || true
+       - name: Run lint
+         run: bun run lint -- --fix
+
+       - name: Check format
+         run: bun run format --check
+
+       - name: Run tests
+         run: bun test

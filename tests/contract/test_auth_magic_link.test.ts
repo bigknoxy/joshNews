@@ -24,6 +24,9 @@ describe('Auth contract: magic link', () => {
 
     expect(res).not.toBeNull();
     if (!res) return;
-    expect([202, 200, 201]).toContain(res.status);
+    expect(res.status).toBe(202);
+    // Response body should be empty for 202 Accepted
+    const text = await res.text();
+    expect(text).toBe('');
   });
 });
