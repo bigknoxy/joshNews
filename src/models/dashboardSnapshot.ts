@@ -14,6 +14,7 @@ export interface DashboardSnapshot {
   endAt: string;
   items: SnapshotItem[];
   createdAt: string;
+  persistedAt?: string;
   algorithmVersion?: string;
   version: number;
 }
