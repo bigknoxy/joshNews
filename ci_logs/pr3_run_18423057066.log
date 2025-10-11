@@ -1,0 +1,400 @@
+test	Set up job	﻿2025-10-11T02:28:15.9277721Z Current runner version: '2.328.0'
+test	Set up job	2025-10-11T02:28:15.9303805Z ##[group]Runner Image Provisioner
+test	Set up job	2025-10-11T02:28:15.9304597Z Hosted Compute Agent
+test	Set up job	2025-10-11T02:28:15.9305143Z Version: 20250912.392
+test	Set up job	2025-10-11T02:28:15.9305996Z Commit: d921fda672a98b64f4f82364647e2f10b2267d0b
+test	Set up job	2025-10-11T02:28:15.9306811Z Build Date: 2025-09-12T15:23:14Z
+test	Set up job	2025-10-11T02:28:15.9307368Z ##[endgroup]
+test	Set up job	2025-10-11T02:28:15.9307904Z ##[group]Operating System
+test	Set up job	2025-10-11T02:28:15.9308491Z Ubuntu
+test	Set up job	2025-10-11T02:28:15.9308965Z 24.04.3
+test	Set up job	2025-10-11T02:28:15.9309402Z LTS
+test	Set up job	2025-10-11T02:28:15.9309892Z ##[endgroup]
+test	Set up job	2025-10-11T02:28:15.9310385Z ##[group]Runner Image
+test	Set up job	2025-10-11T02:28:15.9310922Z Image: ubuntu-24.04
+test	Set up job	2025-10-11T02:28:15.9311476Z Version: 20250929.60.1
+test	Set up job	2025-10-11T02:28:15.9312433Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250929.60/images/ubuntu/Ubuntu2404-Readme.md
+test	Set up job	2025-10-11T02:28:15.9313846Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250929.60
+test	Set up job	2025-10-11T02:28:15.9315045Z ##[endgroup]
+test	Set up job	2025-10-11T02:28:15.9316413Z ##[group]GITHUB_TOKEN Permissions
+test	Set up job	2025-10-11T02:28:15.9318522Z Contents: read
+test	Set up job	2025-10-11T02:28:15.9319046Z Metadata: read
+test	Set up job	2025-10-11T02:28:15.9319619Z Packages: read
+test	Set up job	2025-10-11T02:28:15.9320096Z ##[endgroup]
+test	Set up job	2025-10-11T02:28:15.9322379Z Secret source: Actions
+test	Set up job	2025-10-11T02:28:15.9323480Z Prepare workflow directory
+test	Set up job	2025-10-11T02:28:15.9661454Z Prepare all required actions
+test	Set up job	2025-10-11T02:28:15.9700254Z Getting action download info
+test	Set up job	2025-10-11T02:28:16.2842110Z Download action repository 'actions/checkout@v4' (SHA:08eba0b27e820071cde6df949e0beb9ba4906955)
+test	Set up job	2025-10-11T02:28:16.7304824Z Download action repository 'oven-sh/setup-bun@v1' (SHA:f4d14e03ff726c06358e5557344e1da148b56cf7)
+test	Set up job	2025-10-11T02:28:17.1617187Z Complete job name: test
+test	Run actions/checkout@v4	﻿2025-10-11T02:28:17.2430716Z ##[group]Run actions/checkout@v4
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2432037Z with:
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2432779Z   repository: bigknoxy/joshNews
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2433975Z   token: ***
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2434675Z   ssh-strict: true
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2435448Z   ssh-user: git
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2436448Z   persist-credentials: true
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2437324Z   clean: true
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2438098Z   sparse-checkout-cone-mode: true
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2439042Z   fetch-depth: 1
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2439770Z   fetch-tags: false
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2440535Z   show-progress: true
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2441302Z   lfs: false
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2442015Z   submodules: false
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2442784Z   set-safe-directory: true
+test	Run actions/checkout@v4	2025-10-11T02:28:17.2443870Z ##[endgroup]
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3572092Z Syncing repository: bigknoxy/joshNews
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3576094Z ##[group]Getting Git version info
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3578081Z Working directory is '/home/runner/work/joshNews/joshNews'
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3581089Z [command]/usr/bin/git version
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3646688Z git version 2.51.0
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3674506Z ##[endgroup]
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3691537Z Temporarily overriding HOME='/home/runner/work/_temp/fdb1803d-3bf5-4c46-8dfa-1273f23f2f4e' before making global git config changes
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3696528Z Adding repository directory to the temporary git global config as a safe directory
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3700281Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/joshNews/joshNews
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3737383Z Deleting the contents of '/home/runner/work/joshNews/joshNews'
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3741212Z ##[group]Initializing the repository
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3746298Z [command]/usr/bin/git init /home/runner/work/joshNews/joshNews
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3862741Z hint: Using 'master' as the name for the initial branch. This default branch name
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3864956Z hint: is subject to change. To configure the initial branch name to use in all
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3867843Z hint: of your new repositories, which will suppress this warning, call:
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3870238Z hint:
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3872053Z hint: 	git config --global init.defaultBranch <name>
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3874025Z hint:
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3876405Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3879470Z hint: 'development'. The just-created branch can be renamed via this command:
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3881951Z hint:
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3883166Z hint: 	git branch -m <name>
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3884569Z hint:
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3886627Z hint: Disable this message with "git config set advice.defaultBranchName false"
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3888922Z Initialized empty Git repository in /home/runner/work/joshNews/joshNews/.git/
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3892071Z [command]/usr/bin/git remote add origin https://github.com/bigknoxy/joshNews
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3923128Z ##[endgroup]
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3925470Z ##[group]Disabling automatic garbage collection
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3927848Z [command]/usr/bin/git config --local gc.auto 0
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3961083Z ##[endgroup]
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3963275Z ##[group]Setting up auth
+test	Run actions/checkout@v4	2025-10-11T02:28:17.3969134Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Run actions/checkout@v4	2025-10-11T02:28:17.4002248Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Run actions/checkout@v4	2025-10-11T02:28:17.4342798Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Run actions/checkout@v4	2025-10-11T02:28:17.4377590Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Run actions/checkout@v4	2025-10-11T02:28:17.4599113Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	Run actions/checkout@v4	2025-10-11T02:28:17.4644818Z ##[endgroup]
+test	Run actions/checkout@v4	2025-10-11T02:28:17.4647787Z ##[group]Fetching the repository
+test	Run actions/checkout@v4	2025-10-11T02:28:17.4657098Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +13f18c6bb3366805425f9488f0cb343547fa3680:refs/remotes/pull/3/merge
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7340395Z From https://github.com/bigknoxy/joshNews
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7341850Z  * [new ref]         13f18c6bb3366805425f9488f0cb343547fa3680 -> pull/3/merge
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7373520Z ##[endgroup]
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7374242Z ##[group]Determining the checkout info
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7376610Z ##[endgroup]
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7382660Z [command]/usr/bin/git sparse-checkout disable
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7423258Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7451022Z ##[group]Checking out the ref
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7456151Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/3/merge
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7556188Z Note: switching to 'refs/remotes/pull/3/merge'.
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7556683Z 
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7556947Z You are in 'detached HEAD' state. You can look around, make experimental
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7557457Z changes and commit them, and you can discard any commits you make in this
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7557989Z state without impacting any branches by switching back to a branch.
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7558311Z 
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7558535Z If you want to create a new branch to retain commits you create, you may
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7559016Z do so (now or later) by using -c with the switch command. Example:
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7559303Z 
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7559428Z   git switch -c <new-branch-name>
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7559627Z 
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7559752Z Or undo this operation with:
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7559936Z 
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7560038Z   git switch -
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7560215Z 
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7560509Z Turn off this advice by setting config variable advice.detachedHead to false
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7561036Z 
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7561641Z HEAD is now at 13f18c6 Merge 31fc97e010dc19f940bd87a7b8ee4f239d487600 into b96b6fba4201e4942f0a5ac07b2537a3c1901b25
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7566215Z ##[endgroup]
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7602705Z [command]/usr/bin/git log -1 --format=%H
+test	Run actions/checkout@v4	2025-10-11T02:28:17.7624624Z 13f18c6bb3366805425f9488f0cb343547fa3680
+test	Set up Bun (use setup-bun)	﻿2025-10-11T02:28:17.7812483Z ##[group]Run oven-sh/setup-bun@v1
+test	Set up Bun (use setup-bun)	2025-10-11T02:28:17.7812829Z with:
+test	Set up Bun (use setup-bun)	2025-10-11T02:28:17.7813048Z   no-cache: false
+test	Set up Bun (use setup-bun)	2025-10-11T02:28:17.7813266Z ##[endgroup]
+test	Set up Bun (use setup-bun)	2025-10-11T02:28:17.8929669Z Downloading a new version of Bun: https://bun.sh/download/latest/linux/x64?avx2=true&profile=false
+test	Set up Bun (use setup-bun)	2025-10-11T02:28:18.4974011Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/4f1475fe-9bca-4382-bede-2ff759caae91
+test	Set up Bun (use setup-bun)	2025-10-11T02:28:19.2871067Z [command]/home/runner/.bun/bin/bun --revision
+test	Set up Bun (use setup-bun)	2025-10-11T02:28:19.2912209Z 1.3.0+b0a6feca5
+test	Verify Bun	﻿2025-10-11T02:28:19.3056333Z ##[group]Run echo "--- bun info ---"
+test	Verify Bun	2025-10-11T02:28:19.3056743Z [36;1mecho "--- bun info ---"[0m
+test	Verify Bun	2025-10-11T02:28:19.3057004Z [36;1mbun -v || true[0m
+test	Verify Bun	2025-10-11T02:28:19.3057218Z [36;1mwhich bun || true[0m
+test	Verify Bun	2025-10-11T02:28:19.3057435Z [36;1mnode -v || true[0m
+test	Verify Bun	2025-10-11T02:28:19.3096529Z shell: /usr/bin/bash -e {0}
+test	Verify Bun	2025-10-11T02:28:19.3096813Z ##[endgroup]
+test	Verify Bun	2025-10-11T02:28:19.3172934Z --- bun info ---
+test	Verify Bun	2025-10-11T02:28:19.3187089Z 1.3.0
+test	Verify Bun	2025-10-11T02:28:19.3202721Z /home/runner/.bun/bin/bun
+test	Verify Bun	2025-10-11T02:28:20.2519019Z v20.19.5
+test	Install dependencies (with retries)	﻿2025-10-11T02:28:20.2667910Z ##[group]Run for i in 1 2 3; do
+test	Install dependencies (with retries)	2025-10-11T02:28:20.2668228Z [36;1mfor i in 1 2 3; do[0m
+test	Install dependencies (with retries)	2025-10-11T02:28:20.2668599Z [36;1m  bun install && break || (echo "bun install failed, retrying... ($i)" && sleep 5)[0m
+test	Install dependencies (with retries)	2025-10-11T02:28:20.2668955Z [36;1mdone[0m
+test	Install dependencies (with retries)	2025-10-11T02:28:20.2701175Z shell: /usr/bin/bash -e {0}
+test	Install dependencies (with retries)	2025-10-11T02:28:20.2701422Z ##[endgroup]
+test	Install dependencies (with retries)	2025-10-11T02:28:20.2774902Z bun install v1.3.0 (b0a6feca)
+test	Install dependencies (with retries)	2025-10-11T02:28:20.2787238Z Resolving dependencies
+test	Install dependencies (with retries)	2025-10-11T02:28:21.3529965Z Resolved, downloaded and extracted [678]
+test	Install dependencies (with retries)	2025-10-11T02:28:21.4183598Z Saved lockfile
+test	Install dependencies (with retries)	2025-10-11T02:28:21.4187915Z 
+test	Install dependencies (with retries)	2025-10-11T02:28:21.4188104Z $ husky
+test	Install dependencies (with retries)	2025-10-11T02:28:22.6928135Z 
+test	Install dependencies (with retries)	2025-10-11T02:28:22.6929004Z + @types/node@24.7.1
+test	Install dependencies (with retries)	2025-10-11T02:28:22.6929684Z + @typescript-eslint/eslint-plugin@6.21.0 (v8.46.0 available)
+test	Install dependencies (with retries)	2025-10-11T02:28:22.6930467Z + @typescript-eslint/parser@6.21.0 (v8.46.0 available)
+test	Install dependencies (with retries)	2025-10-11T02:28:22.6931078Z + eslint@8.57.1 (v9.37.0 available)
+test	Install dependencies (with retries)	2025-10-11T02:28:22.6931451Z + husky@9.1.7
+test	Install dependencies (with retries)	2025-10-11T02:28:22.6931801Z + prettier@2.8.8 (v3.6.2 available)
+test	Install dependencies (with retries)	2025-10-11T02:28:22.6932214Z + supertest@6.3.3 (v7.1.4 available)
+test	Install dependencies (with retries)	2025-10-11T02:28:22.6932585Z + typescript@5.9.3
+test	Install dependencies (with retries)	2025-10-11T02:28:22.6932783Z 
+test	Install dependencies (with retries)	2025-10-11T02:28:22.6932930Z 171 packages installed [2.42s]
+test	Run lint	﻿2025-10-11T02:28:22.7150955Z ##[group]Run bun run lint -- --fix
+test	Run lint	2025-10-11T02:28:22.7151292Z [36;1mbun run lint -- --fix[0m
+test	Run lint	2025-10-11T02:28:22.7182922Z shell: /usr/bin/bash -e {0}
+test	Run lint	2025-10-11T02:28:22.7183176Z ##[endgroup]
+test	Run lint	2025-10-11T02:28:22.7251920Z $ eslint "**/*.{ts,tsx,js}" --fix
+test	Check format (prettier check with fallback)	﻿2025-10-11T02:28:24.4849722Z ##[group]Run npx prettier --check "**/*.{ts,tsx,js,json,md}" || npx prettier --write "**/*.{ts,tsx,js,json,md}"
+test	Check format (prettier check with fallback)	2025-10-11T02:28:24.4850780Z [36;1mnpx prettier --check "**/*.{ts,tsx,js,json,md}" || npx prettier --write "**/*.{ts,tsx,js,json,md}"[0m
+test	Check format (prettier check with fallback)	2025-10-11T02:28:24.4897920Z shell: /usr/bin/bash -e {0}
+test	Check format (prettier check with fallback)	2025-10-11T02:28:24.4898325Z ##[endgroup]
+test	Check format (prettier check with fallback)	2025-10-11T02:28:30.0186548Z Checking formatting...
+test	Check format (prettier check with fallback)	2025-10-11T02:28:31.6941497Z All matched files use Prettier code style!
+test	Run tests	﻿2025-10-11T02:28:31.7193945Z ##[group]Run bun test --coverage
+test	Run tests	2025-10-11T02:28:31.7194453Z [36;1mbun test --coverage[0m
+test	Run tests	2025-10-11T02:28:31.7241202Z shell: /usr/bin/bash -e {0}
+test	Run tests	2025-10-11T02:28:31.7241594Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:31.7322673Z bun test v1.3.0 (b0a6feca)
+test	Run tests	2025-10-11T02:28:31.7365834Z 
+test	Run tests	2025-10-11T02:28:31.7366529Z ##[group]tests/integration/startup.test.ts:
+test	Run tests	2025-10-11T02:28:31.7687392Z (pass) app responds on /health with ok [10.00ms]
+test	Run tests	2025-10-11T02:28:31.7687843Z 
+test	Run tests	2025-10-11T02:28:31.7688269Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:31.7688410Z 
+test	Run tests	2025-10-11T02:28:33.7808764Z ##[group]tests/integration/test_cli_serve.test.ts:
+test	Run tests	2025-10-11T02:28:33.7809518Z (pass) CLI serve > should start server and respond to /health with ok [2009.01ms]
+test	Run tests	2025-10-11T02:28:33.7810558Z 
+test	Run tests	2025-10-11T02:28:33.7811217Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.7812639Z 
+test	Run tests	2025-10-11T02:28:33.7813294Z ##[group]tests/integration/test_run_fetch.test.ts:
+test	Run tests	2025-10-11T02:28:33.8327599Z (pass) CLI run-fetch > should fetch and persist items to memory adapter [46.00ms]
+test	Run tests	2025-10-11T02:28:33.8328711Z 
+test	Run tests	2025-10-11T02:28:33.8329353Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.8329741Z 
+test	Run tests	2025-10-11T02:28:33.8330347Z ##[group]tests/feature/refresh_snapshot.test.ts:
+test	Run tests	2025-10-11T02:28:33.8476368Z (pass) Feature: refresh snapshot > refreshes daily snapshot and subsequent GET returns updated version [8.00ms]
+test	Run tests	2025-10-11T02:28:33.8477101Z 
+test	Run tests	2025-10-11T02:28:33.8477734Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.8477908Z 
+test	Run tests	2025-10-11T02:28:33.8478345Z ##[group]tests/feature/fetch_snapshot.test.ts:
+test	Run tests	2025-10-11T02:28:33.8529029Z (pass) Feature: fetch cached snapshot > fetches daily snapshot with correct shape [1.00ms]
+test	Run tests	2025-10-11T02:28:33.8529658Z 
+test	Run tests	2025-10-11T02:28:33.8530551Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.8530752Z 
+test	Run tests	2025-10-11T02:28:33.8531190Z ##[group]tests/feature/ingest_and_snapshot.test.ts:
+test	Run tests	2025-10-11T02:28:33.8588618Z (pass) Integration: add-source -> ingest -> snapshot > adds a source, ingests it, and snapshot contains an item [3.00ms]
+test	Run tests	2025-10-11T02:28:33.8589383Z 
+test	Run tests	2025-10-11T02:28:33.8589830Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.8590046Z 
+test	Run tests	2025-10-11T02:28:33.8590549Z ##[group]tests/contract/test_post_dashboard_refresh.test.ts:
+test	Run tests	2025-10-11T02:28:33.8640032Z (pass) Contract: POST /api/v1/dashboards/{period}/refresh > returns 200 and refreshed snapshot for daily [2.00ms]
+test	Run tests	2025-10-11T02:28:33.8647717Z (pass) Contract: POST /api/v1/dashboards/{period}/refresh > returns 400/404 for invalid period [1.00ms]
+test	Run tests	2025-10-11T02:28:33.8649579Z 
+test	Run tests	2025-10-11T02:28:33.8650083Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.8650268Z 
+test	Run tests	2025-10-11T02:28:33.8650682Z ##[group]tests/contract/test_get_sources.test.ts:
+test	Run tests	2025-10-11T02:28:33.8691796Z (pass) GET /sources > should return list of sources [1.00ms]
+test	Run tests	2025-10-11T02:28:33.8692583Z 
+test	Run tests	2025-10-11T02:28:33.8693126Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.8693368Z 
+test	Run tests	2025-10-11T02:28:33.8694075Z ##[group]tests/contract/test_leaderboard.test.ts:
+test	Run tests	2025-10-11T02:28:33.8728787Z (pass) Leaderboard contract > GET /api/v1/leaderboard?period=daily returns 200 and array [1.00ms]
+test	Run tests	2025-10-11T02:28:33.8729590Z 
+test	Run tests	2025-10-11T02:28:33.8730024Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.8730190Z 
+test	Run tests	2025-10-11T02:28:33.8730733Z ##[group]tests/contract/test_leaderboard_contract.test.ts:
+test	Run tests	2025-10-11T02:28:33.8766027Z (pass) Leaderboard contract > GET /api/v1/leaderboard?period=daily returns 200 and array
+test	Run tests	2025-10-11T02:28:33.8766658Z 
+test	Run tests	2025-10-11T02:28:33.8767013Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.8767135Z 
+test	Run tests	2025-10-11T02:28:33.8767586Z ##[group]tests/contract/test_jobs_status.test.ts:
+test	Run tests	2025-10-11T02:28:33.8810183Z (pass) Jobs contract > GET /api/v1/jobs/{jobId} returns 200 with job fields [3.00ms]
+test	Run tests	2025-10-11T02:28:33.8810745Z 
+test	Run tests	2025-10-11T02:28:33.8811195Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.8811381Z 
+test	Run tests	2025-10-11T02:28:33.8811861Z ##[group]tests/contract/test_dashboards_period.test.ts:
+test	Run tests	2025-10-11T02:28:33.8848807Z (pass) Dashboards contract: daily period > GET /api/v1/dashboards/daily returns 200 and <=50 items sorted by score desc [1.00ms]
+test	Run tests	2025-10-11T02:28:33.8849618Z 
+test	Run tests	2025-10-11T02:28:33.8850065Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.8850249Z 
+test	Run tests	2025-10-11T02:28:33.8850757Z ##[group]tests/contract/test_sources_pagination.test.ts:
+test	Run tests	2025-10-11T02:28:33.9294455Z (pass) Sources contract: pagination and caps > GET /api/v1/sources supports limit/offset and caps at 100 [41.00ms]
+test	Run tests	2025-10-11T02:28:33.9295274Z 
+test	Run tests	2025-10-11T02:28:33.9296014Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.9296160Z 
+test	Run tests	2025-10-11T02:28:33.9296475Z ##[group]tests/contract/test_get_dashboard_period.test.ts:
+test	Run tests	2025-10-11T02:28:33.9347867Z (pass) Contract: GET /api/v1/dashboards/{period} > returns daily snapshot JSON (contract) [2.00ms]
+test	Run tests	2025-10-11T02:28:33.9353709Z (pass) Contract: GET /api/v1/dashboards/{period} > returns weekly snapshot JSON (contract)
+test	Run tests	2025-10-11T02:28:33.9354373Z 
+test	Run tests	2025-10-11T02:28:33.9354906Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.9355962Z 
+test	Run tests	2025-10-11T02:28:33.9357236Z ##[group]tests/contract/test_items_actions.test.ts:
+test	Run tests	2025-10-11T02:28:33.9410407Z (pass) Items contract: actions > POST /api/v1/items/{id}/actions returns 200 [4.00ms]
+test	Run tests	2025-10-11T02:28:33.9410940Z 
+test	Run tests	2025-10-11T02:28:33.9411380Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.9411596Z 
+test	Run tests	2025-10-11T02:28:33.9412004Z ##[group]tests/contract/test_auth_verify.test.ts:
+test	Run tests	2025-10-11T02:28:33.9457813Z (pass) Auth contract: verify > GET /api/v1/auth/verify?token=TEST_TOKEN returns 200 and userId, sessionToken [2.00ms]
+test	Run tests	2025-10-11T02:28:33.9458548Z 
+test	Run tests	2025-10-11T02:28:33.9459095Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.9459265Z 
+test	Run tests	2025-10-11T02:28:33.9459719Z ##[group]tests/contract/test_jobs_start_and_poll.test.ts:
+test	Run tests	2025-10-11T02:28:33.9710875Z (pass) Jobs API contract > POST /api/v1/jobs starts a job by type and can poll until done [24.00ms]
+test	Run tests	2025-10-11T02:28:33.9711737Z 
+test	Run tests	2025-10-11T02:28:33.9712354Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.9712590Z 
+test	Run tests	2025-10-11T02:28:33.9713095Z ##[group]tests/contract/test_get_items.test.ts:
+test	Run tests	2025-10-11T02:28:33.9755889Z (pass) GET /items > should return list of items [1.00ms]
+test	Run tests	2025-10-11T02:28:33.9756478Z 
+test	Run tests	2025-10-11T02:28:33.9757504Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.9757699Z 
+test	Run tests	2025-10-11T02:28:33.9758130Z ##[group]tests/contract/test_jobs_start.test.ts:
+test	Run tests	2025-10-11T02:28:33.9765347Z 
+test	Run tests	2025-10-11T02:28:33.9766387Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.9769838Z 
+test	Run tests	2025-10-11T02:28:33.9770534Z ##[group]tests/contract/test_auth_magic_link.test.ts:
+test	Run tests	2025-10-11T02:28:33.9809183Z (pass) Auth contract: magic link > POST /api/v1/auth/magic-link returns 202 [1.00ms]
+test	Run tests	2025-10-11T02:28:33.9809834Z 
+test	Run tests	2025-10-11T02:28:33.9810505Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.9810667Z 
+test	Run tests	2025-10-11T02:28:33.9810994Z ##[group]tests/contract/test_export_delete.test.ts:
+test	Run tests	2025-10-11T02:28:33.9846878Z (pass) Export & Deletion contract > GET /api/v1/users/{userId}/export returns 200 with downloadUrl [3.00ms]
+test	Run tests	2025-10-11T02:28:33.9870710Z (pass) Export & Deletion contract > DELETE /api/v1/users/{userId}/data returns 202 [2.00ms]
+test	Run tests	2025-10-11T02:28:33.9871376Z 
+test	Run tests	2025-10-11T02:28:33.9871782Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.9872025Z 
+test	Run tests	2025-10-11T02:28:33.9872490Z ##[group]tests/contract/test_sources_crud.test.ts:
+test	Run tests	2025-10-11T02:28:33.9907423Z (pass) Sources contract: CRUD > POST /api/v1/sources returns 201 with id [1.00ms]
+test	Run tests	2025-10-11T02:28:33.9912179Z (pass) Sources contract: CRUD > GET /api/v1/sources returns 200 and array
+test	Run tests	2025-10-11T02:28:33.9912853Z 
+test	Run tests	2025-10-11T02:28:33.9913290Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.9913467Z 
+test	Run tests	2025-10-11T02:28:33.9913852Z ##[group]tests/unit/sources.adapter.test.ts:
+test	Run tests	2025-10-11T02:28:33.9933868Z (pass) Sources adapters > memory adapter: add and list with pagination
+test	Run tests	2025-10-11T02:28:33.9948088Z (pass) Sources adapters > file adapter: persists data to disk and reads back [2.00ms]
+test	Run tests	2025-10-11T02:28:33.9948651Z 
+test	Run tests	2025-10-11T02:28:33.9949043Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:33.9949225Z 
+test	Run tests	2025-10-11T02:28:33.9949637Z ##[group]tests/unit/jobService.timeout.test.ts:
+test	Run tests	2025-10-11T02:28:34.0263005Z (pass) Job service timeout > marks job failed when timeout exceeded [31.00ms]
+test	Run tests	2025-10-11T02:28:34.0263568Z 
+test	Run tests	2025-10-11T02:28:34.0263986Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.0264118Z 
+test	Run tests	2025-10-11T02:28:34.0264374Z ##[group]tests/unit/redisStore.test.ts:
+test	Run tests	2025-10-11T02:28:34.0424875Z (pass) Redis job store (unit) > put/get/list work with a fake redis client [1.00ms]
+test	Run tests	2025-10-11T02:28:34.0426209Z 
+test	Run tests	2025-10-11T02:28:34.0426576Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.0426710Z 
+test	Run tests	2025-10-11T02:28:34.0427147Z ##[group]tests/unit/dashboardSnapshotRefresh.test.ts:
+test	Run tests	2025-10-11T02:28:34.0439492Z (pass) Unit: dashboardService.refreshSnapshot > generates and stores a new snapshot for daily [1.00ms]
+test	Run tests	2025-10-11T02:28:34.0440168Z 
+test	Run tests	2025-10-11T02:28:34.0440471Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.0440592Z 
+test	Run tests	2025-10-11T02:28:34.0440873Z ##[group]tests/unit/jobService.concurrent.test.ts:
+test	Run tests	2025-10-11T02:28:34.1460465Z (pass) Job service concurrency > limits concurrency to 1 and queues jobs [101.00ms]
+test	Run tests	2025-10-11T02:28:34.1461046Z 
+test	Run tests	2025-10-11T02:28:34.1461507Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.1461698Z 
+test	Run tests	2025-10-11T02:28:34.1462128Z ##[group]tests/unit/source.test.ts:
+test	Run tests	2025-10-11T02:28:34.1642550Z (pass) Source model > should create a Source with default fields and valid values [1.00ms]
+test	Run tests	2025-10-11T02:28:34.1643433Z (pass) Source model > should throw for empty name
+test	Run tests	2025-10-11T02:28:34.1644056Z (pass) Source model > should throw for invalid url
+test	Run tests	2025-10-11T02:28:34.1644459Z 
+test	Run tests	2025-10-11T02:28:34.1644954Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.1645086Z 
+test	Run tests	2025-10-11T02:28:34.1645435Z ##[group]tests/unit/dashboardServiceFileAdapter.test.ts:
+test	Run tests	2025-10-11T02:28:34.1655023Z (pass) DashboardService with file adapter > refresh and get snapshot via file adapter
+test	Run tests	2025-10-11T02:28:34.1655780Z 
+test	Run tests	2025-10-11T02:28:34.1656166Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.1656372Z 
+test	Run tests	2025-10-11T02:28:34.1656747Z ##[group]tests/unit/logger.test.ts:
+test	Run tests	2025-10-11T02:28:34.1665108Z (pass) logger outputs JSON when --json flag is set
+test	Run tests	2025-10-11T02:28:34.1665934Z (pass) logger outputs plain text when --json flag is not set
+test	Run tests	2025-10-11T02:28:34.1666901Z (pass) logger respects JSON_LOGS env var [1.00ms]
+test	Run tests	2025-10-11T02:28:34.1667279Z 
+test	Run tests	2025-10-11T02:28:34.1667647Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.1667830Z 
+test	Run tests	2025-10-11T02:28:34.1668193Z ##[group]tests/unit/user.test.ts:
+test	Run tests	2025-10-11T02:28:34.1802336Z (pass) User model validation > valid user passes validation [1.00ms]
+test	Run tests	2025-10-11T02:28:34.1803074Z (pass) User model validation > invalid email fails validation
+test	Run tests	2025-10-11T02:28:34.1803888Z (pass) User model validation > missing required field throws or returns invalid
+test	Run tests	2025-10-11T02:28:34.1804416Z 
+test	Run tests	2025-10-11T02:28:34.1804982Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.1805201Z 
+test	Run tests	2025-10-11T02:28:34.1805779Z ##[group]tests/unit/contentItem.test.ts:
+test	Run tests	2025-10-11T02:28:34.1960717Z (pass) ContentItem model validation > valid content item passes validation [1.00ms]
+test	Run tests	2025-10-11T02:28:34.1962045Z (pass) ContentItem model validation > invalid url fails validation
+test	Run tests	2025-10-11T02:28:34.1962925Z (pass) ContentItem model validation > missing required field returns invalid
+test	Run tests	2025-10-11T02:28:34.1963491Z 
+test	Run tests	2025-10-11T02:28:34.1963898Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.1964126Z 
+test	Run tests	2025-10-11T02:28:34.1964606Z ##[group]tests/unit/sources.validation.test.ts:
+test	Run tests	2025-10-11T02:28:34.2120842Z (pass) Sources validation > rejects invalid source with bad url [1.00ms]
+test	Run tests	2025-10-11T02:28:34.2121649Z (pass) Sources validation > accepts valid link source
+test	Run tests	2025-10-11T02:28:34.2122118Z 
+test	Run tests	2025-10-11T02:28:34.2122535Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.2122762Z 
+test	Run tests	2025-10-11T02:28:34.2123215Z ##[group]tests/unit/authService.test.ts:
+test	Run tests	2025-10-11T02:28:34.2283843Z (pass) Auth service > sendMagicLink returns token and can be verified
+test	Run tests	2025-10-11T02:28:34.2284589Z (pass) Auth service > verifyToken returns null for invalid token
+test	Run tests	2025-10-11T02:28:34.2284958Z 
+test	Run tests	2025-10-11T02:28:34.2285356Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.2285797Z 
+test	Run tests	2025-10-11T02:28:34.2286208Z ##[group]tests/unit/ingestService.test.ts:
+test	Run tests	2025-10-11T02:28:34.2295987Z (pass) ingestService > should read sources and return corresponding items
+test	Run tests	2025-10-11T02:28:34.2296520Z 
+test	Run tests	2025-10-11T02:28:34.2296896Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.2297077Z 
+test	Run tests	2025-10-11T02:28:34.2297534Z ##[group]tests/unit/dashboardSnapshot.test.ts:
+test	Run tests	2025-10-11T02:28:34.2306252Z (pass) DashboardSnapshot model > creates a snapshot with defaults
+test	Run tests	2025-10-11T02:28:34.2306882Z (pass) DashboardSnapshot model > preserves provided fields [1.00ms]
+test	Run tests	2025-10-11T02:28:34.2308384Z (pass) DashboardSnapshot model > validates snapshot shape
+test	Run tests	2025-10-11T02:28:34.2308748Z 
+test	Run tests	2025-10-11T02:28:34.2309005Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.2309116Z 
+test	Run tests	2025-10-11T02:28:34.2309356Z ##[group]tests/unit/jobEndpoint.test.ts:
+test	Run tests	2025-10-11T02:28:34.2347467Z (pass) Job endpoint (unit) > POST /api/v1/jobs delegates to jobService and returns jobId [3.00ms]
+test	Run tests	2025-10-11T02:28:34.2347887Z 
+test	Run tests	2025-10-11T02:28:34.2348129Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.2348251Z 
+test	Run tests	2025-10-11T02:28:34.2348497Z ##[group]tests/unit/fileAdapter.test.ts:
+test	Run tests	2025-10-11T02:28:34.2365347Z (pass) file adapter > refreshSnapshotFile writes and reads snapshot
+test	Run tests	2025-10-11T02:28:34.2368608Z (pass) file adapter > writeSnapshotToFile and read back [1.00ms]
+test	Run tests	2025-10-11T02:28:34.2371447Z (pass) file adapter > cleanup
+test	Run tests	2025-10-11T02:28:34.2371662Z 
+test	Run tests	2025-10-11T02:28:34.2371910Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.2372025Z 
+test	Run tests	2025-10-11T02:28:34.2372261Z ##[group]tests/unit/jobService.test.ts:
+test	Run tests	2025-10-11T02:28:34.2690371Z (pass) Job service (unit) > creates a job and marks it done after work completes [31.00ms]
+test	Run tests	2025-10-11T02:28:34.2691065Z 
+test	Run tests	2025-10-11T02:28:34.2691548Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.2691780Z 
+test	Run tests	2025-10-11T02:28:34.2692297Z ##[group]tests/unit/models/dataModel.validation.test.ts:
+test	Run tests	2025-10-11T02:28:34.2702236Z (pass) Data model validation > rejects invalid URLs for source.value
+test	Run tests	2025-10-11T02:28:34.2704280Z (pass) Data model validation > allows up to 3 signal_explanations and rejects more
+test	Run tests	2025-10-11T02:28:34.2705000Z (pass) Data model validation > accepts valid content item
+test	Run tests	2025-10-11T02:28:34.2705351Z 
+test	Run tests	2025-10-11T02:28:34.2705912Z ##[endgroup]
+test	Run tests	2025-10-11T02:28:34.2706320Z ---------------------------------------|---------|---------|-------------------
+test	Run tests	2025-10-11T02:28:34.2706896Z File                                   | % Funcs | % Lines | Uncovered Line #s
+test	Run tests	2025-10-11T02:28:34.2707426Z ---------------------------------------|---------|---------|-------------------
+test	Run tests	2025-10-11T02:28:34.2732359Z All files                              |   92.98 |   87.92 |
+test	Run tests	2025-10-11T02:28:34.2732957Z  src/adapters/sourcesFileAdapter.ts    |  100.00 |  100.00 | 
+test	Run tests	2025-10-11T02:28:34.2733543Z  src/adapters/sourcesMemoryAdapter.ts  |  100.00 |  100.00 | 
+test	Run tests	2025-10-11T02:28:34.2734202Z  src/adapters/storage/fileAdapter.ts   |  100.00 |   94.29 | 23-24
