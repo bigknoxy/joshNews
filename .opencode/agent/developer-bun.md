@@ -1,6 +1,7 @@
 ---
 description: Bun + TypeScript specialist for Bun-first projects and TDD workflows
 mode: subagent
+model: opencode/code-supernova
 temperature: 0.1
 tools:
   read: true

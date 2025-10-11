@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { startTestServer, stopTestServer } from '../setup/server';
+import { startTestServer } from '../setup/server';
 
 // Contract test stub for export and deletion
 

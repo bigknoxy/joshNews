@@ -1,11 +1,8 @@
 import http from 'http';
-import { dashboardService } from './services/dashboardService';
-import { Period } from './models/dashboardSnapshot';
-
 // Adapter-backed stores for sources
-import { validateSource } from './lib/validators';
 import { createMemoryAdapter } from './adapters/sourcesMemoryAdapter';
 import { setSourcesAdapter } from './lib/sourcesStore';
+import { createLogger } from './cli/logger';
 
 let adapter: any = createMemoryAdapter();
 setSourcesAdapter(adapter);
@@ -44,91 +41,40 @@ export function createServer(): http.Server {
       const matchGet = pathname.match(/^\/api\/v1\/dashboards\/(daily|weekly)\/?$/);
       const matchPost = pathname.match(/^\/api\/v1\/dashboards\/(daily|weekly)\/refresh\/?$/);
 
-      // Auth endpoints wired to authService
-      if (req.method === 'POST' && pathname === '/api/v1/auth/magic-link') {
-        let body = '';
-        for await (const chunk of req) body += chunk;
-        const data = body ? JSON.parse(body) : {};
-        const email = data.email || data.username || '';
-        if (!email) {
-          res.statusCode = 400;
-          res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ error: 'email required' }));
-          return;
-        }
-        try {
-          // lazy import to avoid cycles in tests
-          // @ts-expect-error: dynamic import to avoid circular dependency in tests
-          const { sendMagicLink } = await import('./services/authService');
-          const token = await sendMagicLink(email);
-          res.statusCode = 202;
-          res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ token }));
-          return;
-        } catch (err) {
-          res.statusCode = 500;
-          res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ error: 'internal', message: String(err) }));
-          return;
-        }
-      }
-
-      if (req.method === 'GET' && pathname === '/api/v1/auth/verify') {
-        const token = url.searchParams.get('token') || '';
-        try {
-          // @ts-expect-error: dynamic import to avoid circular dependency in tests
-          const { verifyToken } = await import('./services/authService');
-          const verified = await verifyToken(token);
-          if (!verified) {
-            res.statusCode = 400;
-            res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify({ error: 'invalid token' }));
-            return;
-          }
-          res.statusCode = 200;
-          res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify(verified));
-          return;
-        } catch (err) {
-          res.statusCode = 500;
-          res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ error: 'internal', message: String(err) }));
-          return;
-        }
-      }
-
-      // Sources CRUD
-      if (pathname === '/api/v1/sources' && req.method === 'POST') {
-        let body = '';
-        for await (const chunk of req) body += chunk;
-        const data = body ? JSON.parse(body) : {};
-        // validate
-        const v = validateSource(data);
-        if (!v.valid) {
-          res.statusCode = 400;
-          res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ error: 'invalid', errors: v.errors }));
-          return;
-        }
-        // use adapter
-        const rec = await adapter.addSource(data);
-        res.statusCode = 201;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ id: rec.id }));
+      // Auth endpoints
+      if (pathname === '/api/v1/auth/magic-link') {
+        const { handleMagicLink } = await import('./routes/auth');
+        await handleMagicLink(req, res);
         return;
       }
 
-      if (pathname === '/api/v1/sources' && req.method === 'GET') {
-        const limitParam = Number(url.searchParams.get('limit') || '100');
-        const offsetParam = Number(url.searchParams.get('offset') || '0');
-        const requested = Number.isFinite(limitParam) ? Math.max(0, limitParam) : 100;
-        const offset = Number.isFinite(offsetParam) ? Math.max(0, offsetParam) : 0;
-        const cap = 100;
-        const actualLimit = Math.min(requested, cap);
-        const list = await adapter.listSources(offset, actualLimit);
+      if (pathname === '/api/v1/auth/verify') {
+        const { handleVerify } = await import('./routes/auth');
+        await handleVerify(req, res);
+        return;
+      }
+
+      // Sources CRUD
+      if (pathname === '/api/v1/sources') {
+        if (req.method === 'POST') {
+          const { handlePostSources } = await import('./routes/sources');
+          await handlePostSources(req, res);
+          return;
+        }
+        if (req.method === 'GET') {
+          const { handleGetSources } = await import('./routes/sources');
+          await handleGetSources(req, res);
+          return;
+        }
+      }
+
+      // Items
+      if (req.method === 'GET' && pathname === '/api/v1/items') {
+        const { ingestAll } = await import('./services/ingestService');
+        const items = await ingestAll();
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(list));
+        res.end(JSON.stringify(items));
         return;
       }
 
@@ -148,7 +94,6 @@ export function createServer(): http.Server {
         let body = '';
         for await (const chunk of req) body += chunk;
         const data = body ? JSON.parse(body) : {};
-        // @ts-expect-error: dynamic import for test-time wiring
         const { jobService } = await import('./services/jobRegistry');
         // support starting by type or by inline function
         const jobId = jobService.startJob(
@@ -164,7 +109,6 @@ export function createServer(): http.Server {
 
       if (req.method === 'GET' && jobsMatch) {
         const jobId = jobsMatch[1];
-        // @ts-expect-error: dynamic import for test-time wiring
         const { jobService } = await import('./services/jobRegistry');
         const j = jobService.getJob(jobId);
         if (!j) {
@@ -203,35 +147,16 @@ export function createServer(): http.Server {
         return;
       }
 
-      if (req.method === 'GET' && matchGet) {
-        const period = matchGet[1] as Period;
-        const snapshot = await dashboardService.getSnapshot(period);
-        if (!snapshot) {
-          res.statusCode = 404;
-          res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ error: 'not found' }));
-          return;
-        }
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(snapshot));
+      if (matchGet) {
+        const { handleGetDashboard } = await import('./routes/dashboards');
+        await handleGetDashboard(req, res);
         return;
       }
 
-      if (req.method === 'POST' && matchPost) {
-        const period = matchPost[1] as Period;
-        try {
-          const refreshed = await dashboardService.refreshSnapshot(period);
-          res.statusCode = 200;
-          res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify(refreshed));
-          return;
-        } catch (err) {
-          res.statusCode = 500;
-          res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ error: 'internal', message: String(err) }));
-          return;
-        }
+      if (matchPost) {
+        const { handleRefreshDashboard } = await import('./routes/dashboards');
+        await handleRefreshDashboard(req, res);
+        return;
       }
 
       res.statusCode = 404;
@@ -247,7 +172,6 @@ export function createServer(): http.Server {
 export async function startServer(port = PORT) {
   // initialize adapter if file-based
   if (process.env.SOURCES_ADAPTER === 'file') {
-    // @ts-expect-error: dynamic import to avoid loading file adapter unless requested
     const { createFileAdapter } = await import('./adapters/sourcesFileAdapter');
     // choose a default file path
     adapter = await createFileAdapter('./data/sources.json');
@@ -260,5 +184,6 @@ export async function startServer(port = PORT) {
 }
 
 if (require.main === module) {
-  startServer().then(() => console.log(`Server listening on ${PORT}`));
+  const logger = createLogger();
+  startServer().then(() => logger.info(`Server listening on ${PORT}`));
 }
