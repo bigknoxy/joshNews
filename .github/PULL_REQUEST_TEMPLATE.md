@@ -27,6 +27,19 @@ A brief sentence explaining why these changes were made and what problem they so
 
 If extra steps are required for this PR (e.g., environment variables, running a job, or a specific test), list them here.
 
+**Testing notes for contributors (important):**
+
+- Some tests rely on environment variables to select adapters (for example `USE_FILE_ADAPTER` and `SNAPSHOT_STORAGE_DIR`). Set these environment variables before importing application modules in tests. Prefer dynamic imports in tests when you need to set env vars at runtime.
+- Pattern to follow in tests:
+  ```ts
+  // set env BEFORE importing service/module
+  process.env.USE_FILE_ADAPTER = 'true';
+  process.env.SNAPSHOT_STORAGE_DIR = path.resolve('tests/tmp', `snapshots-${Date.now()}`);
+  const mod = await import('../../src/services/dashboardService');
+  const DashboardService = mod.DashboardService;
+  ```
+- Avoid relying on module import-time side effects for selecting adapters; prefer constructor-level flags or factory functions that read env vars at runtime.
+
 ---
 
 ### Deployment / rollout notes
