@@ -72,6 +72,7 @@ Approval process:
 Compliance reviews:
 
 - Every release cycle (or at least quarterly) the maintainers MUST run a constitution compliance audit: verify CI, templates, and a sample plan pass the Constitution Check. Failures must be tracked and remediated via issues.
+
 <!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
 
 **Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE): set original adoption date | **Last Amended**: 2025-10-01
